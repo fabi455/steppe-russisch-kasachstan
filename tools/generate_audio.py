@@ -1,21 +1,70 @@
 #!/usr/bin/env python3
-"""Generate locally stored Russian pronunciation practice MP3s with eSpeak + FFmpeg.
-The speech is synthetic and not a replacement for recordings by native speakers.
-"""
-import json, subprocess, tempfile, concurrent.futures
-from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1]
-words=[item for lesson in json.loads((ROOT/'content.json').read_text('utf-8')) for item in lesson['words']+lesson['phrases']]
-audio_dir=ROOT/'audio';audio_dir.mkdir(exist_ok=True)
+"""Generate all Steppe offline MP3s using a natural Russian neural voice.
 
-def make(item):
-    out=audio_dir/(item['id']+'.mp3')
-    if out.exists() and out.stat().st_size>500:return out.name
-    with tempfile.TemporaryDirectory() as t:
-        wav=str(Path(t)/'voice.wav')
-        subprocess.run(['espeak','-v','ru','-s','137','-a','170','-w',wav,item['term']],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
-        subprocess.run(['ffmpeg','-nostdin','-hide_banner','-loglevel','error','-y','-i',wav,'-ac','1','-ar','24000','-codec:a','libmp3lame','-q:a','6',str(out)],check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
-    return out.name
-with concurrent.futures.ThreadPoolExecutor(max_workers=5) as pool:
-    names=list(pool.map(make,words))
-print(f'{len(names)} MP3-Audios erstellt / geprüft; Gesamtgröße {sum(p.stat().st_size for p in audio_dir.glob("*.mp3"))//1024} KiB')
+This build-time tool uses an unofficial Microsoft Edge Read Aloud endpoint.
+The Android app plays bundled files fully offline. No fallback to eSpeak.
+"""
+import asyncio
+import json
+import os
+import random
+from pathlib import Path
+
+import edge_tts
+
+ROOT = Path(__file__).resolve().parents[1]
+CONTENT = ROOT / 'content.json'
+AUDIO = ROOT / 'audio'
+VOICE = 'ru-RU-SvetlanaNeural'
+RATE = '-7%'
+CONCURRENCY = 2
+
+
+def items_to_speak():
+    lessons = json.loads(CONTENT.read_text(encoding='utf-8'))
+    result = [item for lesson in lessons for item in lesson['words'] + lesson['phrases']]
+    assert len(result) == 128, f'Erwartet: 128 Einträge, gefunden: {len(result)}'
+    assert len({item['id'] for item in result}) == len(result), 'Doppelte Audio-IDs'
+    for item in result:
+        assert item['term'].strip(), item['id']
+    return result
+
+
+async def generate(item, semaphore):
+    destination = AUDIO / (item['id'] + '.mp3')
+    if destination.exists() and destination.stat().st_size > 2500:
+        return destination
+    async with semaphore:
+        for attempt in range(5):
+            partial = AUDIO / (item['id'] + '.partial.mp3')
+            try:
+                partial.unlink(missing_ok=True)
+                speech = edge_tts.Communicate(item['term'], VOICE, rate=RATE)
+                await asyncio.wait_for(speech.save(str(partial)), timeout=55)
+                data = partial.read_bytes()
+                if len(data) < 2500 or not (data[:3] == b'ID3' or data[:2] in (b'\xff\xfb', b'\xff\xf3', b'\xff\xf2')):
+                    raise ValueError(f'MP3 unvollständig/ungültig: {item["id"]} ({len(data)} Bytes)')
+                os.replace(partial, destination)
+                print(f'OK {item["id"]} {item["term"][:32]} ({len(data)} Bytes)', flush=True)
+                return destination
+            except Exception as exc:
+                partial.unlink(missing_ok=True)
+                print(f'Neural TTS Versuch {attempt + 1}/5 für {item["id"]}: {exc}', flush=True)
+                if attempt == 4:
+                    raise RuntimeError(f'Keine neuronale Audioausgabe für {item["term"]}') from exc
+                await asyncio.sleep(min(30, 2 ** attempt * 2 + random.random()))
+
+
+async def main():
+    AUDIO.mkdir(exist_ok=True)
+    items = items_to_speak()
+    semaphore = asyncio.Semaphore(CONCURRENCY)
+    await asyncio.gather(*(generate(item, semaphore) for item in items))
+    files = [AUDIO / (item['id'] + '.mp3') for item in items]
+    assert all(f.exists() and f.stat().st_size > 2500 for f in files)
+    print(f'Alle {len(files)} neuronalen MP3s vorhanden, Gesamtgröße '
+          f'{sum(f.stat().st_size for f in files) / 1024 / 1024:.2f} MiB; Stimme: {VOICE}', flush=True)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

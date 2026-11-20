@@ -1,4 +1,4 @@
-const CACHE = 'steppe-russisch-offline-v1';
+const CACHE = 'steppe-russisch-offline-v2-neural';
 const CORE = ['./','./index.html','./app.js','./style.css','./content.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{

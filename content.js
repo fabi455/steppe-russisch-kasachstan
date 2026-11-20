@@ -1,0 +1,754 @@
+window.STEPPE_CONTENT = [
+  {
+    "title": "Hallo, Kasachstan!",
+    "subtitle": "Begrüßen und höflich sein",
+    "symbol": "П",
+    "tag": "Grundlagen",
+    "intro": "Wir starten mit den wichtigsten russischen Wendungen für Begegnungen in Almaty, Astana und ganz Kasachstan.",
+    "tip": "Привет ist vertraut, Здравствуйте ist höflich. In Kasachstan ist Kasachisch die Staatssprache; Russisch wird ebenfalls häufig verwendet. Höfliche Anrede mit вы ist beim Kennenlernen oft passend.",
+    "minutes": 12,
+    "words": [
+      {
+        "id": "w01_2805ae8e7",
+        "term": "Привет",
+        "meaning": "Hallo (informell)"
+      },
+      {
+        "id": "w01_e2d105a25",
+        "term": "Здравствуйте",
+        "meaning": "Guten Tag (höflich)"
+      },
+      {
+        "id": "w01_d73c91bbc",
+        "term": "Доброе утро",
+        "meaning": "Guten Morgen"
+      },
+      {
+        "id": "w01_51d822d03",
+        "term": "Добрый день",
+        "meaning": "Guten Tag"
+      },
+      {
+        "id": "w01_37f9f18bd",
+        "term": "Добрый вечер",
+        "meaning": "Guten Abend"
+      },
+      {
+        "id": "w01_b4e35841a",
+        "term": "До свидания",
+        "meaning": "Auf Wiedersehen"
+      },
+      {
+        "id": "w01_dd31cacf7",
+        "term": "Спасибо",
+        "meaning": "Danke"
+      },
+      {
+        "id": "w01_283ec2bb7",
+        "term": "Пожалуйста",
+        "meaning": "Bitte / gern geschehen"
+      },
+      {
+        "id": "w01_8d2fab2d1",
+        "term": "Да",
+        "meaning": "Ja"
+      },
+      {
+        "id": "w01_f82a82194",
+        "term": "Нет",
+        "meaning": "Nein"
+      },
+      {
+        "id": "w01_365a57d96",
+        "term": "Извините",
+        "meaning": "Entschuldigung (höflich)"
+      },
+      {
+        "id": "w01_de665302f",
+        "term": "Хорошо",
+        "meaning": "Gut / in Ordnung"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p01_32e878e3c",
+        "term": "Здравствуйте! Как дела?",
+        "meaning": "Guten Tag! Wie geht es Ihnen?"
+      },
+      {
+        "id": "p01_2c4d6c511",
+        "term": "Спасибо, хорошо.",
+        "meaning": "Danke, gut."
+      },
+      {
+        "id": "p01_546d429da",
+        "term": "Извините, вы говорите по-русски?",
+        "meaning": "Entschuldigung, sprechen Sie Russisch?"
+      },
+      {
+        "id": "p01_49d2ffe42",
+        "term": "До свидания! Хорошего дня!",
+        "meaning": "Auf Wiedersehen! Einen schönen Tag!"
+      }
+    ],
+    "id": "l1"
+  },
+  {
+    "title": "Ich spreche Russisch",
+    "subtitle": "Sich vorstellen und Fragen stellen",
+    "symbol": "Я",
+    "tag": "Gespräch",
+    "intro": "Vorname, Herkunft und einfache Fragen: Damit kannst du dich im Gespräch vorstellen.",
+    "tip": "Я = ich, вы = Sie/ihr (höflich). Im Präsens wird „sein“ oft weggelassen: Я из Германии = Ich bin aus Deutschland. „Меня зовут ...“ bedeutet wörtlich: Mich nennt man ...",
+    "minutes": 14,
+    "words": [
+      {
+        "id": "w02_8e7c6cca0",
+        "term": "Я",
+        "meaning": "ich"
+      },
+      {
+        "id": "w02_adb4032a9",
+        "term": "Вы",
+        "meaning": "Sie / ihr (höflich)"
+      },
+      {
+        "id": "w02_f9be75c32",
+        "term": "Ты",
+        "meaning": "du"
+      },
+      {
+        "id": "w02_2441c919e",
+        "term": "Меня",
+        "meaning": "mich / mir"
+      },
+      {
+        "id": "w02_84b94b132",
+        "term": "Зовут",
+        "meaning": "nennt man / heißen"
+      },
+      {
+        "id": "w02_aee78fe86",
+        "term": "Имя",
+        "meaning": "Vorname"
+      },
+      {
+        "id": "w02_b17b142c7",
+        "term": "Откуда",
+        "meaning": "woher"
+      },
+      {
+        "id": "w02_542237d7d",
+        "term": "Германия",
+        "meaning": "Deutschland"
+      },
+      {
+        "id": "w02_dfc92caef",
+        "term": "Казахстан",
+        "meaning": "Kasachstan"
+      },
+      {
+        "id": "w02_52dd49ae5",
+        "term": "Немного",
+        "meaning": "ein wenig"
+      },
+      {
+        "id": "w02_8a60652e4",
+        "term": "Понимаю",
+        "meaning": "ich verstehe"
+      },
+      {
+        "id": "w02_953810e4f",
+        "term": "Повторите",
+        "meaning": "Wiederholen Sie"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p02_c32cee858",
+        "term": "Меня зовут Анна.",
+        "meaning": "Ich heiße Anna."
+      },
+      {
+        "id": "p02_23332aace",
+        "term": "Я из Германии.",
+        "meaning": "Ich komme aus Deutschland."
+      },
+      {
+        "id": "p02_4f8a61816",
+        "term": "Я немного говорю по-русски.",
+        "meaning": "Ich spreche ein bisschen Russisch."
+      },
+      {
+        "id": "p02_03e706b4f",
+        "term": "Повторите, пожалуйста, медленнее.",
+        "meaning": "Wiederholen Sie bitte langsamer."
+      }
+    ],
+    "id": "l2"
+  },
+  {
+    "title": "Tenge & Zahlen",
+    "subtitle": "Preise verstehen und bezahlen",
+    "symbol": "₸",
+    "tag": "Geld",
+    "intro": "In Kasachstan bezahlst du mit Tenge (₸). Lerne Zahlen und einen sicheren Einstieg fürs Einkaufen.",
+    "tip": "Russische Zahlen sind wichtig für Preise in Tenge. „Сколько стоит?“ bedeutet „Wie viel kostet es?“. Die Form von тенге bleibt nach Zahlen gleich: 500 тенге.",
+    "minutes": 15,
+    "words": [
+      {
+        "id": "w03_0401a1578",
+        "term": "Один",
+        "meaning": "eins"
+      },
+      {
+        "id": "w03_745748e51",
+        "term": "Два",
+        "meaning": "zwei"
+      },
+      {
+        "id": "w03_4b5834429",
+        "term": "Три",
+        "meaning": "drei"
+      },
+      {
+        "id": "w03_5033b3db7",
+        "term": "Пять",
+        "meaning": "fünf"
+      },
+      {
+        "id": "w03_f870ecf19",
+        "term": "Десять",
+        "meaning": "zehn"
+      },
+      {
+        "id": "w03_196999135",
+        "term": "Двадцать",
+        "meaning": "zwanzig"
+      },
+      {
+        "id": "w03_5d9e2f5ce",
+        "term": "Сто",
+        "meaning": "hundert"
+      },
+      {
+        "id": "w03_11f802d41",
+        "term": "Тысяча",
+        "meaning": "tausend"
+      },
+      {
+        "id": "w03_18a5ea01d",
+        "term": "Тенге",
+        "meaning": "Tenge (Währung)"
+      },
+      {
+        "id": "w03_367e2792c",
+        "term": "Цена",
+        "meaning": "Preis"
+      },
+      {
+        "id": "w03_ca401a20d",
+        "term": "Дорого",
+        "meaning": "teuer"
+      },
+      {
+        "id": "w03_4a4783417",
+        "term": "Дёшево",
+        "meaning": "günstig / billig"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p03_746e4dfd6",
+        "term": "Сколько это стоит?",
+        "meaning": "Wie viel kostet das?"
+      },
+      {
+        "id": "p03_ff9468881",
+        "term": "Это стоит пятьсот тенге.",
+        "meaning": "Das kostet fünfhundert Tenge."
+      },
+      {
+        "id": "p03_02f99475b",
+        "term": "Можно оплатить картой?",
+        "meaning": "Kann ich mit Karte bezahlen?"
+      },
+      {
+        "id": "p03_6c92e2561",
+        "term": "Это слишком дорого.",
+        "meaning": "Das ist zu teuer."
+      }
+    ],
+    "id": "l3"
+  },
+  {
+    "title": "Unterwegs in der Stadt",
+    "subtitle": "Taxi, Adresse und Wege",
+    "symbol": "Т",
+    "tag": "Unterwegs",
+    "intro": "Du fährst durch Almaty oder Astana? Diese Wörter helfen dir bei Taxis und Wegbeschreibungen.",
+    "tip": "„Мне нужно ...“ = Ich brauche ... / Ich muss nach ... . Verwende zur Richtungsangabe в: „в аэропорт“ (zum Flughafen). Die Namen Алматы und Астана sind Städtenamen.",
+    "minutes": 15,
+    "words": [
+      {
+        "id": "w04_95405f676",
+        "term": "Город",
+        "meaning": "Stadt"
+      },
+      {
+        "id": "w04_d0baaff9a",
+        "term": "Улица",
+        "meaning": "Straße"
+      },
+      {
+        "id": "w04_8db46ea78",
+        "term": "Адрес",
+        "meaning": "Adresse"
+      },
+      {
+        "id": "w04_977d2667e",
+        "term": "Такси",
+        "meaning": "Taxi"
+      },
+      {
+        "id": "w04_0f0bb7614",
+        "term": "Водитель",
+        "meaning": "Fahrer / Fahrerin"
+      },
+      {
+        "id": "w04_17470f24d",
+        "term": "Аэропорт",
+        "meaning": "Flughafen"
+      },
+      {
+        "id": "w04_df0965429",
+        "term": "Вокзал",
+        "meaning": "Bahnhof"
+      },
+      {
+        "id": "w04_a2eb6c16a",
+        "term": "Остановка",
+        "meaning": "Haltestelle"
+      },
+      {
+        "id": "w04_657d3c1e4",
+        "term": "Налево",
+        "meaning": "links"
+      },
+      {
+        "id": "w04_a3fc89772",
+        "term": "Направо",
+        "meaning": "rechts"
+      },
+      {
+        "id": "w04_c0f97ab27",
+        "term": "Прямо",
+        "meaning": "geradeaus"
+      },
+      {
+        "id": "w04_fa01903fa",
+        "term": "Рядом",
+        "meaning": "in der Nähe"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p04_3667bec0a",
+        "term": "Мне нужно в аэропорт.",
+        "meaning": "Ich muss zum Flughafen."
+      },
+      {
+        "id": "p04_cadd94a09",
+        "term": "Отвезите меня по этому адресу.",
+        "meaning": "Fahren Sie mich bitte zu dieser Adresse."
+      },
+      {
+        "id": "p04_ba5e8c95a",
+        "term": "Остановите здесь, пожалуйста.",
+        "meaning": "Halten Sie bitte hier an."
+      },
+      {
+        "id": "p04_055793fc6",
+        "term": "Сколько ехать до центра?",
+        "meaning": "Wie lange fährt man ins Zentrum?"
+      }
+    ],
+    "id": "l4"
+  },
+  {
+    "title": "Bazar & Essen",
+    "subtitle": "Bestellen, trinken, einkaufen",
+    "symbol": "Б",
+    "tag": "Alltag",
+    "intro": "Bestelle im Café oder kaufe auf dem Bazar etwas ein – mit typisch kasachstanischen Speisen als Beispiel.",
+    "tip": "„Я хочу ...“ = Ich möchte ... (direkt). Höflicher im Café: „Можно ...?“ (Kann ich ... bekommen?). Бауырсак (auch baursak geschrieben) ist ein verbreitetes zentralasiatisches Gebäck.",
+    "minutes": 16,
+    "words": [
+      {
+        "id": "w05_5ecbec814",
+        "term": "Вода",
+        "meaning": "Wasser"
+      },
+      {
+        "id": "w05_23617b52f",
+        "term": "Чай",
+        "meaning": "Tee"
+      },
+      {
+        "id": "w05_a3adaa3e6",
+        "term": "Кофе",
+        "meaning": "Kaffee"
+      },
+      {
+        "id": "w05_dedf98c39",
+        "term": "Хлеб",
+        "meaning": "Brot"
+      },
+      {
+        "id": "w05_43a548f28",
+        "term": "Мясо",
+        "meaning": "Fleisch"
+      },
+      {
+        "id": "w05_d6d6af805",
+        "term": "Суп",
+        "meaning": "Suppe"
+      },
+      {
+        "id": "w05_dd904bebd",
+        "term": "Меню",
+        "meaning": "Speisekarte"
+      },
+      {
+        "id": "w05_d386f41a4",
+        "term": "Счёт",
+        "meaning": "Rechnung"
+      },
+      {
+        "id": "w05_510af5895",
+        "term": "Базар",
+        "meaning": "Bazar / Markt"
+      },
+      {
+        "id": "w05_f3834bd76",
+        "term": "Баурсак",
+        "meaning": "Baursak (Gebäck)"
+      },
+      {
+        "id": "w05_7537543f5",
+        "term": "Кумыс",
+        "meaning": "Kumys (Stutenmilchgetränk)"
+      },
+      {
+        "id": "w05_5044924e3",
+        "term": "Вкусно",
+        "meaning": "lecker"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p05_43ba77634",
+        "term": "Можно меню, пожалуйста?",
+        "meaning": "Kann ich bitte die Speisekarte bekommen?"
+      },
+      {
+        "id": "p05_416075146",
+        "term": "Мне чай без сахара, пожалуйста.",
+        "meaning": "Für mich Tee ohne Zucker, bitte."
+      },
+      {
+        "id": "p05_0b00279df",
+        "term": "У вас есть баурсаки?",
+        "meaning": "Haben Sie Baursaks?"
+      },
+      {
+        "id": "p05_163a80dda",
+        "term": "Принесите счёт, пожалуйста.",
+        "meaning": "Bringen Sie bitte die Rechnung."
+      }
+    ],
+    "id": "l5"
+  },
+  {
+    "title": "Freunde & Familie",
+    "subtitle": "Sich kennenlernen und erzählen",
+    "symbol": "Д",
+    "tag": "Menschen",
+    "intro": "Erzähle von dir und sprich mit Freunden oder Verwandten auf Russisch.",
+    "tip": "Im Russischen gibt es drei grammatische Geschlechter. „мой“ steht bei maskulinen, „моя“ bei femininen Substantiven. Das Verb mag ich: „мне нравится“ (mir gefällt).",
+    "minutes": 14,
+    "words": [
+      {
+        "id": "w06_1bf1b9fb4",
+        "term": "Семья",
+        "meaning": "Familie"
+      },
+      {
+        "id": "w06_72e85426c",
+        "term": "Друг",
+        "meaning": "Freund"
+      },
+      {
+        "id": "w06_f6c4ebe35",
+        "term": "Подруга",
+        "meaning": "Freundin"
+      },
+      {
+        "id": "w06_5560f48a4",
+        "term": "Мама",
+        "meaning": "Mutter / Mama"
+      },
+      {
+        "id": "w06_240343944",
+        "term": "Папа",
+        "meaning": "Vater / Papa"
+      },
+      {
+        "id": "w06_fce15e227",
+        "term": "Брат",
+        "meaning": "Bruder"
+      },
+      {
+        "id": "w06_ba8bc39c2",
+        "term": "Сестра",
+        "meaning": "Schwester"
+      },
+      {
+        "id": "w06_93bcaa4e4",
+        "term": "Дети",
+        "meaning": "Kinder"
+      },
+      {
+        "id": "w06_92f3f459e",
+        "term": "Дом",
+        "meaning": "Haus / Zuhause"
+      },
+      {
+        "id": "w06_75436e316",
+        "term": "Работа",
+        "meaning": "Arbeit"
+      },
+      {
+        "id": "w06_2e3c5fdaf",
+        "term": "Учёба",
+        "meaning": "Studium / Lernen"
+      },
+      {
+        "id": "w06_11688c164",
+        "term": "Вместе",
+        "meaning": "zusammen"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p06_3c18a2dc7",
+        "term": "Это моя семья.",
+        "meaning": "Das ist meine Familie."
+      },
+      {
+        "id": "p06_3b51ded90",
+        "term": "Мой друг живёт в Алматы.",
+        "meaning": "Mein Freund wohnt in Almaty."
+      },
+      {
+        "id": "p06_adc9ca63e",
+        "term": "У меня есть брат и сестра.",
+        "meaning": "Ich habe einen Bruder und eine Schwester."
+      },
+      {
+        "id": "p06_a81f3f091",
+        "term": "Рад с вами познакомиться.",
+        "meaning": "Freut mich, Sie kennenzulernen (Sprecher männlich)."
+      }
+    ],
+    "id": "l6"
+  },
+  {
+    "title": "Bahn & Reise",
+    "subtitle": "Fahrkarten, Uhrzeit, Orientierung",
+    "symbol": "А",
+    "tag": "Reisen",
+    "intro": "Praktisches Russisch für Reisen zwischen Städten und am Bahnhof.",
+    "tip": "„До Алматы“ bedeutet „nach Almaty“ bei einer Fahrt oder Fahrkarte. Für den Zug sagt man „на поезде“; „отправление“ ist die Abfahrt.",
+    "minutes": 15,
+    "words": [
+      {
+        "id": "w07_b89d8ca4e",
+        "term": "Поезд",
+        "meaning": "Zug"
+      },
+      {
+        "id": "w07_7270525c6",
+        "term": "Автобус",
+        "meaning": "Bus"
+      },
+      {
+        "id": "w07_3a37364dc",
+        "term": "Билет",
+        "meaning": "Fahrkarte / Ticket"
+      },
+      {
+        "id": "w07_f04bd0a06",
+        "term": "Расписание",
+        "meaning": "Fahrplan"
+      },
+      {
+        "id": "w07_5d5d2ea20",
+        "term": "Сегодня",
+        "meaning": "heute"
+      },
+      {
+        "id": "w07_f6de15c50",
+        "term": "Завтра",
+        "meaning": "morgen"
+      },
+      {
+        "id": "w07_51403c82d",
+        "term": "Вчера",
+        "meaning": "gestern"
+      },
+      {
+        "id": "w07_88be20fd0",
+        "term": "Сейчас",
+        "meaning": "jetzt"
+      },
+      {
+        "id": "w07_c80d7e817",
+        "term": "Время",
+        "meaning": "Zeit"
+      },
+      {
+        "id": "w07_6630ee7a9",
+        "term": "Отправление",
+        "meaning": "Abfahrt"
+      },
+      {
+        "id": "w07_4361d3946",
+        "term": "Прибытие",
+        "meaning": "Ankunft"
+      },
+      {
+        "id": "w07_89009febe",
+        "term": "Платформа",
+        "meaning": "Bahnsteig / Plattform"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p07_45a320ff9",
+        "term": "Мне нужен билет до Алматы.",
+        "meaning": "Ich brauche eine Fahrkarte nach Almaty."
+      },
+      {
+        "id": "p07_c16f28041",
+        "term": "Когда отправляется поезд?",
+        "meaning": "Wann fährt der Zug ab?"
+      },
+      {
+        "id": "p07_f23269fe0",
+        "term": "Где находится платформа?",
+        "meaning": "Wo ist der Bahnsteig?"
+      },
+      {
+        "id": "p07_b469de021",
+        "term": "Я еду в Астану завтра.",
+        "meaning": "Ich fahre morgen nach Astana."
+      }
+    ],
+    "id": "l7"
+  },
+  {
+    "title": "Hotel & Hilfe",
+    "subtitle": "Probleme freundlich lösen",
+    "symbol": "К",
+    "tag": "Praxis",
+    "intro": "Im Hotel einchecken, nach Hilfe fragen und dich in ungewohnten Situationen verständigen.",
+    "tip": "„Помогите!“ ist ein Hilferuf; höflicher „Помогите, пожалуйста.“ In Kasachstan werden Kasachisch und Russisch benutzt – manchmal ist ein freundlicher Wechsel zur anderen Sprache hilfreich.",
+    "minutes": 16,
+    "words": [
+      {
+        "id": "w08_e455516fd",
+        "term": "Гостиница",
+        "meaning": "Hotel"
+      },
+      {
+        "id": "w08_1bb3d154c",
+        "term": "Номер",
+        "meaning": "Zimmer / Nummer"
+      },
+      {
+        "id": "w08_9086cd5ed",
+        "term": "Бронь",
+        "meaning": "Reservierung"
+      },
+      {
+        "id": "w08_04284960f",
+        "term": "Паспорт",
+        "meaning": "Reisepass"
+      },
+      {
+        "id": "w08_cc6ec0f06",
+        "term": "Ключ",
+        "meaning": "Schlüssel"
+      },
+      {
+        "id": "w08_e0cbf2c2c",
+        "term": "Помогите",
+        "meaning": "Helfen Sie!"
+      },
+      {
+        "id": "w08_d1ad7c2e0",
+        "term": "Врач",
+        "meaning": "Arzt / Ärztin"
+      },
+      {
+        "id": "w08_d244571ac",
+        "term": "Аптека",
+        "meaning": "Apotheke"
+      },
+      {
+        "id": "w08_8e8ced301",
+        "term": "Полиция",
+        "meaning": "Polizei"
+      },
+      {
+        "id": "w08_97cc5958e",
+        "term": "Больница",
+        "meaning": "Krankenhaus"
+      },
+      {
+        "id": "w08_ad74dbdb1",
+        "term": "Потерял",
+        "meaning": "verloren (Sprecher männlich)"
+      },
+      {
+        "id": "w08_900044713",
+        "term": "Плохо",
+        "meaning": "schlecht / unwohl"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p08_065b369ba",
+        "term": "У меня есть бронь.",
+        "meaning": "Ich habe eine Reservierung."
+      },
+      {
+        "id": "p08_d2f8bd575",
+        "term": "Где ближайшая аптека?",
+        "meaning": "Wo ist die nächste Apotheke?"
+      },
+      {
+        "id": "p08_93a9bde89",
+        "term": "Помогите мне, пожалуйста!",
+        "meaning": "Helfen Sie mir bitte!"
+      },
+      {
+        "id": "p08_81d927b24",
+        "term": "Я плохо себя чувствую.",
+        "meaning": "Mir geht es nicht gut."
+      }
+    ],
+    "id": "l8"
+  }
+];

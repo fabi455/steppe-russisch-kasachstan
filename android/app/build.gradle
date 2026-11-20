@@ -1,0 +1,33 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.steppe.russisch'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'com.steppe.russisch'
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName '1.0.0'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    sourceSets {
+        main {
+            assets.srcDirs = [layout.buildDirectory.dir('generated/steppeAssets')]
+        }
+    }
+}
+
+tasks.register('prepareSteppeAssets', Copy) {
+    def root = rootProject.projectDir.parentFile
+    from(root) {
+        include 'index.html', 'style.css', 'app.js', 'content.js', 'content.json', 'manifest.webmanifest'
+        include 'audio/**', 'icons/**'
+    }
+    into layout.buildDirectory.dir('generated/steppeAssets')
+}
+tasks.named('preBuild') { dependsOn('prepareSteppeAssets') }

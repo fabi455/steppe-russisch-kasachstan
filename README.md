@@ -1,5 +1,15 @@
 # Steppe Russisch 1.4 – Russisch für Kasachstan 🇰🇿
 
+## Einheitliche russische Stimme: Svetlana
+
+Auf Wunsch wird das **Audio-Lernpaket** wieder vollständig auf `ru-RU-SvetlanaNeural` umgestellt (leichter Lernmodus: −7 % Sprechtempo). Die **128 ursprünglichen Aufnahmen** aus Steppe 1.1 werden übernommen, sofern ihre russischen Texte unverändert sind. Alle weiteren Wörter und Sätze werden mit **derselben Stimme** neu gesprochen.
+
+Dafür verwendet `.github/workflows/content-updates.yml` 16 unabhängige Audiogruppen mit Wiederholungsversuchen. Jede einzelne neue MP3-Datei muss erfolgreich mit **Svetlana** erzeugt werden. **Es gibt keinen Ersatz durch Dmitri oder eSpeak.** Falls der externe Sprachdienst ausfällt, wird *kein* fehlerhaftes Sprachpaket veröffentlicht – die bisher installierten Aufnahmen bleiben verfügbar.
+
+Wenn sämtliche **321 MP3-Dateien** geprüft sind, veröffentlicht GitHub ein neues Content-Release unter `content-latest`. Die bestehende Steppe-App ab **Version 1.4** kann unter **Einstellungen → Aktualisierungen → Lerninhalte aktualisieren** das neue Sprachpaket herunterladen, ohne die APK neu zu installieren. Nach dem erfolgreichen Herunterladen die Lernansicht neu öffnen. Die neuen Svetlana-Hörproben funktionieren anschließend auch **offline**. Andere Inhalte und der Lernstand bleiben erhalten.
+
+Die Aufnahmen sind synthetische Stimmen, keine Aufnahmen echter Sprecherinnen. Der inoffizielle Edge-Read-Aloud-Dienst kann vorübergehend rate-limitieren oder ausfallen.
+
 ## NEU: Aktualisierungen ohne Deinstallation
 
 Die Android-App 1.4 kann künftig neue **Wörter, Lektionen und russische Hörproben** als geprüftes Lernpaket von deinem GitHub abrufen. Neue Kursdaten erscheinen nach dem Neustart der Lernansicht – **ohne erneute APK-Installation**. Der Lernfortschritt und alle persönlichen Bewertungen bleiben unter dem bisherigen Schlüssel `steppe-russisch-kz-v1` auf dem Gerät.

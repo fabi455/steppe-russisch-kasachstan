@@ -1,10 +1,11 @@
 {
   "schema": 1,
-  "revision": 45067354245,
-  "size": 2804630,
-  "sha256": "f49a1feb4c56fdd2e903b810e2018528f68d74877e4a8695979c82fca5c08b90",
+  "revision": 45068849716,
+  "size": 3624808,
+  "sha256": "b9067fa3ca150762bfda9c26553f3239b870a95d3b817a280964fd05e6ad7e2b",
   "items": 321,
   "lessons": 20,
-  "updated_at": "2026-11-22T20:36:52Z",
-  "download": "https://github.com/fabi455/steppe-russisch-kasachstan/releases/download/content-latest/steppe-content.zip"
+  "updated_at": "2026-11-22T20:53:22Z",
+  "download": "https://github.com/fabi455/steppe-russisch-kasachstan/releases/download/content-latest/steppe-content.zip",
+  "voice": "ru-RU-SvetlanaNeural"
 }

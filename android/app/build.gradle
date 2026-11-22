@@ -8,13 +8,32 @@ android {
         applicationId 'com.steppe.russisch'
         minSdk 24
         targetSdk 35
-        versionCode 6
-        versionName '1.4.0'
+        // CI increments the code for Android's in-place APK update checks.
+        versionCode providers.gradleProperty('steppeVersionCode').orElse('6').get().toInteger()
+        versionName providers.gradleProperty('steppeVersionName').orElse('1.4.0').get()
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+    // Keep the private signing keystore OUT of the public GitHub repository.
+    // Set GitHub Actions secrets for the first stable signed release.
+    signingConfigs {
+        steppeRelease {
+            storeFile file(System.getenv('STEPPE_KEYSTORE_PATH') ?: 'not-configured.jks')
+            storePassword System.getenv('STEPPE_STORE_PASSWORD') ?: ''
+            keyAlias System.getenv('STEPPE_KEY_ALIAS') ?: 'steppe'
+            keyPassword System.getenv('STEPPE_KEY_PASSWORD') ?: ''
+        }
+    }
+    buildTypes {
+        release {
+            if (System.getenv('STEPPE_KEYSTORE_PATH')) {
+                signingConfig signingConfigs.steppeRelease
+            }
+        }
+    }
+
     sourceSets {
         main {
             assets.srcDirs = [layout.buildDirectory.dir('generated/steppeAssets')]

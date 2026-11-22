@@ -8,8 +8,8 @@ android {
         applicationId 'com.steppe.russisch'
         minSdk 24
         targetSdk 35
-        versionCode 5
-        versionName '1.3.1'
+        versionCode 6
+        versionName '1.4.0'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -25,7 +25,7 @@ android {
 tasks.register('prepareSteppeAssets', Copy) {
     def root = rootProject.projectDir.parentFile
     from(root) {
-        include 'index.html', 'style.css', 'app.js', 'adaptive.js', 'content.js', 'content.json', 'manifest.webmanifest'
+        include 'index.html', 'style.css', 'app.js', 'adaptive.js', 'content.js', 'content.json', 'manifest.webmanifest', 'updates/update-revision.json'
         include 'audio/**', 'icons/**', 'dictionary/**'
     }
     into layout.buildDirectory.dir('generated/steppeAssets')

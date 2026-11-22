@@ -34,15 +34,15 @@ if "window.STEPPE_LEXICON=" not in html:
 clips = {}
 for mp3 in sorted((root / "audio").glob("*.mp3")):
     clips[mp3.stem] = "data:audio/mpeg;base64," + base64.b64encode(mp3.read_bytes()).decode("ascii")
-if len(clips) != 320:
-    raise RuntimeError(f"Erwartet 320 Hörproben, gefunden {len(clips)}")
+if len(clips) != 321:
+    raise RuntimeError(f"Erwartet 321 Hörproben, gefunden {len(clips)}")
 if "<script>/* EMBED_AUDIO */</script>" not in html:
     raise RuntimeError("Audiomarker fehlt")
 html = html.replace("<script>/* EMBED_AUDIO */</script>",
                     "<script>window.STEPPE_EMBED_AUDIO=" +
                     json.dumps(clips, ensure_ascii=False, separators=(",", ":")) + ";</script>")
 html = html.replace("</head>", '<meta name="offline-version" content="Steppe 1.2: full dictionary + audio"/>\n</head>')
-out = root / "dist" / "Steppe-Russisch-1.3-Offline.html"
+out = root / "dist" / "Steppe-Russisch-1.3.1-Offline.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(html, encoding="utf-8")
 print(f"Offline-App: {out.stat().st_size:,} Bytes, {len(clips)} Audios und Wörterbuch eingebettet")

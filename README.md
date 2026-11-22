@@ -1,45 +1,75 @@
-# Steppe – Russisch für Kasachstan 🇰🇿
+# Steppe Russisch 1.3 – Russisch für Kasachstan 🇰🇿
 
-Deutschsprachige Sprachlern-App auf Basis des Lernaufbaus von **Norrœna**, mit **8 Lektionen, 96 Vokabeln, 32 Sätzen**, wiederholbaren Quizfragen, Karteikarten mit Intervalltraining, Wörterbuch, Audio (normal/langsam), Fortschritt, Favoriten und Export/Import. **128 russische MP3-Hörbeispiele** werden beim Android-Build automatisch erzeugt und anschließend vollständig in die installierbare App eingebaut.
+**20 Lektionen, 240 Lernvokabeln, 80 Beispielsätze, 320 natürliche russische Neural-Hörproben** und ein **offline verfügbares Russisch-Deutsch-Wörterbuch mit 56.514 Einträgen**.
 
-## Wie benutzen?
+## Neu: Dein persönlicher Lernpfad
 
-**Ohne Installation:** `Steppe-Russisch-Kasachstan-Offline.html` auf dem Gerät öffnen. Alle Lerninhalte und die Hörbeispiele sind darin enthalten; keine Verbindung nötig. Browser muss lokale HTML-Dateien öffnen können.
+In der Navigation auf **Mein Lernpfad** tippen. Steppe erstellt automatisch passende Lernempfehlungen aus deinem tatsächlichen Lernstand:
+- **„Kann ich“** bei einer Vokabel verschiebt die nächste Wiederholung zunächst um einen Tag, danach um drei Tage und anschließend in längeren Abständen.
+- **„Noch üben“** oder eine **falsche Quizantwort** markiert das Wort als unsicher und gibt ihm früher erneut eine Chance.
+- Die **Lernrunde wird bei jedem neuen Start** neu zusammengestellt (bis zu zwölf Wörter/Sätze pro Runde), mit Schwerpunkt auf schwierigen, fälligen und neuen Wörtern.
+- Ein passender **Wissenstest** fragt gezielt Wörter aus dem entsprechenden Lernstatus ab; dadurch ändert sich die nächste Empfehlung.
+- Deine vorhandenen **Lernstände und Lektionsergebnisse aus Version 1.1 bleiben kompatibel**, weil die ursprünglichen acht Lektionen und ihre Audio-IDs unverändert sind.
 
-**Web-App:** Projektdateien entpacken und im Projektordner `python3 -m http.server 8000` ausführen; dann `http://localhost:8000` aufrufen. PWA per Browser-Menü installieren; alle Lerninhalte lassen sich nach dem ersten Besuch offline nutzen.
+Der Algorithmus funktioniert **lokal auf deinem Gerät, ohne Cloud-KI und ohne Konto**. Er erkennt keine gesprochene Aussprache; die Selbsteinschätzung erfolgt über die beiden Buttons und die Quiz-Antworten.
 
-**Android-App:** Die APK gibt es über [GitHub Actions](https://github.com/fabi455/steppe-russisch-kasachstan/actions/workflows/android-apk.yml): Erfolgreichen Build öffnen, dann unter „Artifacts“ `Steppe-Russisch-Android-APK` herunterladen, ZIP entpacken und `app-debug.apk` installieren. Das Verzeichnis `android/` ist ein eigenständiges Android-WebView-Projekt mit den lokalen Lerninhalten. Zum Bauen Android SDK 35, JDK 17 und Gradle 8.9 installieren, danach im Verzeichnis `android` `gradle :app:assembleDebug` ausführen. Ergebnis: `android/app/build/outputs/apk/debug/app-debug.apk`. Alternativ das Repository auf GitHub veröffentlichen: `.github/workflows/android-apk.yml` erzeugt eine APK als GitHub Actions Artefakt. **Die Audio-Dateien werden im Workflow erzeugt, sodass der Quellcode ohne binäre Audiodateien auskommt.**
+## Lerninhalte
 
-## Was wird gelernt?
+Die ursprünglichen acht Lektionen bleiben bestehen. Zwölf zusätzliche Lektionen vermitteln:
+1. Zeit & Verabredungen
+2. Wetter & Kleidung
+3. Metro, Bus & Taxi
+4. Wege & Orientierung
+5. Apotheke & Gesundheit
+6. Arbeit & Studium
+7. Handy & Internet
+8. Kleidung & Einkaufen
+9. Bank & Geldwechsel
+10. Natur & Ausflüge
+11. Wohnung & Unterkunft
+12. Probleme & Notfälle
 
-1. Hallo, Kasachstan! – Begrüßungen
-2. Ich spreche Russisch – Sich vorstellen
-3. Tenge & Zahlen – Preise und Bezahlen
-4. Unterwegs in der Stadt – Taxi, Flughafen, Wegbeschreibung
-5. Bazar & Essen – Bestellen und Einkaufen
-6. Freunde & Familie – Gespräche
-7. Bahn & Reise – Fahrkarten und Zeiten
-8. Hotel & Hilfe – Reservierung und Notsituationen
+Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die 320 eingebetteten MP3s werden beim Build durch die neuronale russische Stimme **Svetlana** erzeugt (eine synthetische Stimme, keine echten Sprecheraufnahmen). Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
 
-Der Fokus sind typische Gespräche auf Russisch in Kasachstan, **kein Kazakh-Sprachkurs**. Die kyrillische Schrift wird mit einer vereinfachten Umschrift zum Einstieg ergänzt; die Hörbeispiele wurden mit einer neuronalen russischen Stimme (Edge Read Aloud: Svetlana) synthetisiert und sind keine echten Sprecheraufnahmen.
+## Großwörterbuch
 
-## Datenschutz
+Über **Wörterbuch → Großwörterbuch** findest du **56.514 unterschiedliche russische Stichwörter** mit deutschen Bedeutungen, außerdem Wortartenfilter, Suche in beide Richtungen und eine Merkliste. Diese Daten sind **offline eingebunden**. Anders als die 320 Kursaufnahmen haben die 56.514 Wörterbucheinträge **keine eigenen MP3-Dateien**. Ein Wörterbuch mit buchstäblich allen jemals verwendeten russischen Wörtern ist nicht möglich; Beugungsformen, Spezialvokabular und regionale Varianten sind teilweise unvollständig.
 
-Alle Daten bleiben lokal auf dem Gerät; keine Werbung, Konten, Tracker oder Cloud-Verbindung. Import und Export des Lernfortschritts als JSON.
+**Datenquelle und Lizenz:** <https://openrussian.org/>; Originaldaten: <https://github.com/Badestrand/russian-dictionary>, Commit `50e210c4803237779cb562bc1abcea529066031c`, unter **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**, <https://creativecommons.org/licenses/by-sa/4.0/>. Bearbeitung: Zusammenführung gleicher Grundformen, Entfernung von Einträgen ohne deutsche Übersetzung, verkürzte Anzeigeform und kompaktes JSON. Der abgeleitete Wörterbuchdatensatz `dictionary/ru-de.js` steht ebenfalls unter **CC BY-SA 4.0**. Bitte diese Herkunfts- und Lizenzinformation bei jeder Weitergabe erhalten.
 
-## Quellen / landeskundlicher Hintergrund
+## Android-APK herunterladen
 
-- Kasachische Staatsverfassung, Art. 7: https://www.gov.kz/article/232335?lang=en
-- Nationalbank Kasachstans zur Landeswährung Tenge: https://nationalbank.kz/en/page/currency-history
+[GitHub Actions](https://github.com/fabi455/steppe-russisch-kasachstan/actions/workflows/android-apk.yml) öffnen, den **erfolgreichen Build** wählen, unter **Artifacts** `Steppe-Russisch-1.3-Adaptiv-APK` herunterladen, ZIP entpacken und `app-debug.apk` auf dem Android-Handy öffnen. Diese APK ist eine Debug-Version zur persönlichen Installation, kein Play-Store-Release.
 
-Kein offizielles Angebot der Republik Kasachstan. Version 1.1, Lernprojekt.
+**Vor einem möglicherweise nötigen Deinstallieren der alten App:** Unter Einstellungen **Lernstand exportieren** und die JSON-Sicherung nach Installation von Steppe 1.3 importieren. Android-Debug-APK-Signaturen können sich zwischen Builds unterscheiden.
 
-## Hinweis zur Web-App
+Die Offline-Web-Version liegt ebenfalls als GitHub-Actions-Artefakt `Steppe-Russisch-1.3-Offline-Web` vor, wenn der Build erfolgreich ist.
 
-Für den Betrieb über einen lokalen Webserver die Audiodateien einmal erzeugen: `python3 -m pip install edge-tts==7.3.1 && python3 tools/generate_audio.py`. Danach liegen sie unter `audio/`. Die Android-App enthält sie nach dem GitHub-Build komplett offline.
+## Selbst entwickeln / bauen
 
-## Version 1.1 – natürlichere russische Stimme
+JDK 17, Android SDK 35 und Gradle 8.9; Python 3.12 für den Build und das Paket `edge-tts==7.3.1` sind erforderlich.
 
-Die alte eSpeak-Ausgabe wurde durch die russische Neuralstimme `ru-RU-SvetlanaNeural` ersetzt. Alle 128 Hörbeispiele werden **beim Build** über ein inoffizielles Edge-Read-Aloud-Modul erzeugt und anschließend vollständig **offline** in die APK gepackt. Die russische Neuralstimme klingt natürlicher, bleibt aber synthetisch. Audioaufnahmen von Muttersprachlern werden nicht vorgetäuscht. Fällt der Online-Dienst bei der Erstellung aus, schlägt der Build fehl, statt stillschweigend Roboter-Audio zu verwenden.
+```bash
+python3 tools/build_dictionary.py
+python3 -m pip install edge-tts==7.3.1
+python3 tools/generate_audio.py
+python3 tools/build_standalone.py
+cd android && gradle --no-daemon :app:assembleDebug
+```
 
-Der Lernfortschritt bleibt in der App erhalten, wenn sie über eine kompatibel signierte Version installiert wird. Bei GitHub-Debug-APKs kann das Signaturzertifikat zwischen Builds wechseln: Vor einem nötigen Deinstallieren **Einstellungen → Sicherung exportieren**, nach der Installation **Sicherung importieren**.
+Die OpenRussian-Wörterbuch-CSV-Dateien und Neural-MP3-Aufnahmen werden **zur Buildzeit** online heruntergeladen/erzeugt. Einmal gebaut, benötigt die fertige Android-App für Lerninhalte, Wörterbuch, Karteikarten, Audio und Fortschritt **keinen Internetzugang**.
+
+Persönliche Lerndaten werden lokal gespeichert; keine Registrierung, Werbung oder Nutzerverfolgung. Der Service der Buildzeit-TTS-Stimme ist ein externer, inoffizieller Dienst, der sich ändern kann.
+
+## Technischer Aufbau
+
+- `content.js` und `content.json`: 20 Lektionen und 320 eindeutige Audio-IDs
+- `adaptive.js`: lokaler Algorithmus für Wiederholungsabstände und individuelle Übungsauswahl
+- `app.js`: Lernoberfläche, Quiz, Lernfortschritt, Karteikarten
+- `dictionary/ui.js`: offline Wörterbuchsuche und Merkliste
+- `tools/build_dictionary.py`: Download mit Prüfhash der Wörterbuchquelle, Aufbereitung in `dictionary/ru-de.js`
+- `tools/generate_audio.py`: erzeugt 320 russische Neural-MP3s im `audio/`-Verzeichnis
+- `tools/build_standalone.py`: portable Offline-Browser-Version mit Wörterbuch und Audio
+- `android/` + `.github/workflows/android-apk.yml`: Android-App und automatischer CI-Build
+
+Nicht offizielles Angebot Kasachstans.

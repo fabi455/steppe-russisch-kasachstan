@@ -1,4 +1,4 @@
-name: Steppe Russisch – Android APK mit 56k-Wörterbuch
+name: Steppe Russisch 1.3 – Adaptiv + 20 Lektionen + 56k-Wörterbuch
 on:
   push:
     branches: [main]
@@ -37,14 +37,15 @@ jobs:
           python3 tools/build_dictionary.py
           python3 -m py_compile tools/build_dictionary.py tools/build_standalone.py
           node --check app.js
+          node --check adaptive.js
           node --check dictionary/ui.js
           node --check dictionary/ru-de.js
       - name: Install natural neural TTS engine
         run: python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1'
-      - name: Generate original 128 Russian lesson MP3s
+      - name: Generate all 320 Russian lesson MP3s
         run: |
           python3 tools/generate_audio.py
-          test "$(find audio -name '*.mp3' | wc -l)" -eq 128
+          test "$(find audio -name '*.mp3' | wc -l)" -eq 320
       - name: Build full offline browser edition
         run: python3 tools/build_standalone.py
       - name: Build installable Android APK
@@ -53,14 +54,14 @@ jobs:
       - name: Upload installable Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Russisch-1.2-Woerterbuch-APK
+          name: Steppe-Russisch-1.3-Adaptiv-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 90
       - name: Upload portable offline HTML edition
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Russisch-1.2-Offline-Web
-          path: dist/Steppe-Russisch-1.2-Offline.html
+          name: Steppe-Russisch-1.3-Offline-Web
+          path: dist/Steppe-Russisch-1.3-Offline.html
           if-no-files-found: error
           retention-days: 90

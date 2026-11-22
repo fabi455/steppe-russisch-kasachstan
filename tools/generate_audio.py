@@ -1,70 +1,108 @@
 #!/usr/bin/env python3
-"""Generate all Steppe offline MP3s using a natural Russian neural voice.
+"""Generate 320 offline Russian MP3 clips with neural TTS and a reliable fallback.
 
-This build-time tool uses an unofficial Microsoft Edge Read Aloud endpoint.
-The Android app plays bundled files fully offline. No fallback to eSpeak.
+Preferred voice: Microsoft Edge Svetlana Neural (unofficial endpoint, may throttle).
+Fallback: offline Piper "ru_RU-dmitri-medium" model (CC0 training data).
+Only build tools need external services. Android playback is always offline.
 """
 import asyncio
 import json
 import os
 import random
+import subprocess
+import tempfile
+import wave
 from pathlib import Path
 
-import edge_tts
+from edge_tts import Communicate
 
 ROOT = Path(__file__).resolve().parents[1]
-CONTENT = ROOT / 'content.json'
-AUDIO = ROOT / 'audio'
-VOICE = 'ru-RU-SvetlanaNeural'
-RATE = '-7%'
-CONCURRENCY = 2
-
+AUDIO = ROOT / "audio"
+VOICE = "ru-RU-SvetlanaNeural"
+RATE = "-7%"
+PIPER_MODEL = ROOT / "voice" / "ru_RU-dmitri-medium.onnx"
 
 def items_to_speak():
-    lessons = json.loads(CONTENT.read_text(encoding='utf-8'))
-    result = [item for lesson in lessons for item in lesson['words'] + lesson['phrases']]
-    assert len(result) == 320, f'Erwartet: 320 Einträge, gefunden: {len(result)}'
-    assert len({item['id'] for item in result}) == len(result), 'Doppelte Audio-IDs'
-    for item in result:
-        assert item['term'].strip(), item['id']
+    lessons = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
+    result = [entry for lesson in lessons for entry in lesson["words"] + lesson["phrases"]]
+    if len(lessons) != 20 or len(result) != 320:
+        raise RuntimeError(f"Expected 20 lessons and 320 speech clips, found {len(lessons)} / {len(result)}")
+    if len({w["id"] for w in result}) != 320 or any(not w["term"].strip() for w in result):
+        raise RuntimeError("Invalid/duplicated text-to-speech entry")
     return result
 
+def valid_mp3(file):
+    if not file.exists() or file.stat().st_size < 2200:
+        return False
+    h = file.read_bytes()[:3]
+    return h == b"ID3" or (len(h) >= 2 and h[0] == 255 and (h[1] & 224) == 224)
 
-async def generate(item, semaphore):
-    destination = AUDIO / (item['id'] + '.mp3')
-    if destination.exists() and destination.stat().st_size > 2500:
-        return destination
-    async with semaphore:
-        for attempt in range(5):
-            partial = AUDIO / (item['id'] + '.partial.mp3')
+_piper_voice = None
+def piper_speech(item, out):
+    """Offline deterministic neural synthesis when remote TTS is unavailable."""
+    global _piper_voice
+    from piper import PiperVoice
+    if _piper_voice is None:
+        if not PIPER_MODEL.is_file():
+            raise RuntimeError(f"Fallback voice model missing: {PIPER_MODEL}")
+        _piper_voice = PiperVoice.load(str(PIPER_MODEL))
+    with tempfile.TemporaryDirectory() as tmp:
+        wav = Path(tmp) / "speech.wav"
+        with wave.open(str(wav), "wb") as audio_file:
+            _piper_voice.synthesize_wav(item["term"], audio_file)
+        subprocess.run(
+            ["ffmpeg","-nostdin","-hide_banner","-loglevel","error","-y",
+             "-i",str(wav),"-ac","1","-ar","24000",
+             "-codec:a","libmp3lame","-q:a","5",str(out)],
+            check=True,stdout=subprocess.DEVNULL,stderr=subprocess.PIPE)
+    if not valid_mp3(out):
+        raise RuntimeError(f"Piper MP3 failed validation for {item['id']}")
+    return out
+
+async def one(item, sem):
+    destination = AUDIO / (item["id"] + ".mp3")
+    if valid_mp3(destination):
+        return item["id"], "cached"
+    async with sem:
+        part = AUDIO / (item["id"] + ".partial.mp3")
+        for attempt in range(2):
             try:
-                partial.unlink(missing_ok=True)
-                speech = edge_tts.Communicate(item['term'], VOICE, rate=RATE)
-                await asyncio.wait_for(speech.save(str(partial)), timeout=55)
-                data = partial.read_bytes()
-                if len(data) < 2500 or not (data[:3] == b'ID3' or data[:2] in (b'\xff\xfb', b'\xff\xf3', b'\xff\xf2')):
-                    raise ValueError(f'MP3 unvollständig/ungültig: {item["id"]} ({len(data)} Bytes)')
-                os.replace(partial, destination)
-                print(f'OK {item["id"]} {item["term"][:32]} ({len(data)} Bytes)', flush=True)
-                return destination
+                part.unlink(missing_ok=True)
+                async with asyncio.timeout(50):
+                    await Communicate(item["term"], VOICE, rate=RATE).save(str(part))
+                if not valid_mp3(part):
+                    raise RuntimeError("MP3 empty/invalid")
+                os.replace(part, destination)
+                print("Svetlana",item["id"],item["term"][:36],flush=True)
+                await asyncio.sleep(0.6)
+                return item["id"], "SvetlanaNeural"
             except Exception as exc:
-                partial.unlink(missing_ok=True)
-                print(f'Neural TTS Versuch {attempt + 1}/5 für {item["id"]}: {exc}', flush=True)
-                if attempt == 4:
-                    raise RuntimeError(f'Keine neuronale Audioausgabe für {item["term"]}') from exc
-                await asyncio.sleep(min(30, 2 ** attempt * 2 + random.random()))
-
+                part.unlink(missing_ok=True)
+                print(f"Edge TTS attempt {attempt+1}/2 for {item['id']}: {exc}",flush=True)
+                await asyncio.sleep(1.2+random.random())
+        # Never fall back to the old robotic eSpeak voice.
+        await asyncio.to_thread(piper_speech, item, destination)
+        print("Piper-Dmitri fallback",item["id"],item["term"][:36],flush=True)
+        return item["id"], "PiperDmitri"
 
 async def main():
     AUDIO.mkdir(exist_ok=True)
-    items = items_to_speak()
-    semaphore = asyncio.Semaphore(CONCURRENCY)
-    await asyncio.gather(*(generate(item, semaphore) for item in items))
-    files = [AUDIO / (item['id'] + '.mp3') for item in items]
-    assert all(f.exists() and f.stat().st_size > 2500 for f in files)
-    print(f'Alle {len(files)} neuronalen MP3s vorhanden, Gesamtgröße '
-          f'{sum(f.stat().st_size for f in files) / 1024 / 1024:.2f} MiB; Stimme: {VOICE}', flush=True)
+    entries = items_to_speak()
+    sem = asyncio.Semaphore(1)
+    results = await asyncio.gather(*(one(entry,sem) for entry in entries))
+    clips = [AUDIO / (item["id"]+".mp3") for item in entries]
+    if len(clips) != 320 or not all(valid_mp3(file) for file in clips):
+        raise RuntimeError("One or more MP3 assets failed verification")
+    sources = dict(results)
+    (AUDIO / "sources.json").write_text(
+        json.dumps({"source":"Neural synthesizers (not native speaker recordings)",
+                    "primary":"ru-RU-SvetlanaNeural",
+                    "fallback":"Piper ru_RU-dmitri-medium (CC0 speech data)",
+                    "items":sources},ensure_ascii=False,indent=2),encoding="utf-8")
+    fallback_count=sum(v=="PiperDmitri" for v in sources.values())
+    print(f"SUCCESS: {len(clips)} valid Russian neural MP3s, "
+          f"{sum(p.stat().st_size for p in clips)/1048576:.1f} MiB, "
+          f"{fallback_count} local neural fallbacks",flush=True)
 
-
-if __name__ == '__main__':
+if __name__=="__main__":
     asyncio.run(main())

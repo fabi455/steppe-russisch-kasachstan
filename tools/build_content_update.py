@@ -50,6 +50,13 @@ def create():
         "updated_at":datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "download": "https://github.com/fabi455/steppe-russisch-kasachstan/releases/download/content-latest/steppe-content.zip"
     }
+    # The voice claim is included only in a job that verified EVERY spoken
+    # asset was created by the same voice. Other older builds remain unlabeled.
+    voice = os.environ.get("STEPPE_AUDIO_VOICE", "").strip()
+    if voice:
+        if voice != "ru-RU-SvetlanaNeural":
+            raise ValueError("Unverified TTS voice label")
+        catalog["voice"] = voice
     (DIST/"latest.json").write_text(
         json.dumps(catalog,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print(f"Steppe content update r{REVISION}: {len(lessons)} lessons, {len(ids)} MP3 files, {len(bytes)} bytes, SHA-256 {catalog['sha256']}",flush=True)

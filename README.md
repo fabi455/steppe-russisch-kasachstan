@@ -29,7 +29,7 @@ Die ursprünglichen acht Lektionen bleiben bestehen. Zwölf zusätzliche Lektion
 11. Wohnung & Unterkunft
 12. Probleme & Notfälle
 
-Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die 320 eingebetteten MP3s werden beim Build durch die neuronale russische Stimme **Svetlana** erzeugt (eine synthetische Stimme, keine echten Sprecheraufnahmen). Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
+Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die 320 eingebetteten MP3s werden beim Build bevorzugt durch die neuronale russische Stimme **Svetlana** erzeugt. Falls dieser externe Sprachdienst einzelne Aufnahmen nicht liefert, nutzt der Build als Reserve das lokal laufende neuronale Piper-Modell **Dmitri** (Sprachdatensatz CC0). Die Stimmen sind synthetisch, keine echten Sprecheraufnahmen. Die Tonfarbe kann deshalb in einzelnen Hörproben variieren. Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
 
 ## Großwörterbuch
 
@@ -47,11 +47,12 @@ Die Offline-Web-Version liegt ebenfalls als GitHub-Actions-Artefakt `Steppe-Russ
 
 ## Selbst entwickeln / bauen
 
-JDK 17, Android SDK 35 und Gradle 8.9; Python 3.12 für den Build und das Paket `edge-tts==7.3.1` sind erforderlich.
+JDK 17, Android SDK 35 und Gradle 8.9; Python 3.12 für den Build, `edge-tts==7.3.1`, `piper-tts==1.8.0`, die Stimme `ru_RU-dmitri-medium` sowie FFmpeg sind erforderlich.
 
 ```bash
 python3 tools/build_dictionary.py
-python3 -m pip install edge-tts==7.3.1
+python3 -m pip install edge-tts==7.3.1 piper-tts==1.8.0
+mkdir -p voice && cd voice && python3 -m piper.download_voices ru_RU-dmitri-medium && cd ..
 python3 tools/generate_audio.py
 python3 tools/build_standalone.py
 cd android && gradle --no-daemon :app:assembleDebug

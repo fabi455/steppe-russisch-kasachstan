@@ -56,7 +56,7 @@ def accent(value: str, bare: str) -> str:
     if not value or value == bare:
         return ""
     # OpenRussian marks stress using an apostrophe after a vowel.
-    value = re.sub(r"([аеёиоуыэюяАЕЁИОУЫЭЮЯ])'", r"\1\u0301", value)
+    value = re.sub(r"([аеёиоуыэюяАЕЁИОУЫЭЮЯ])'", lambda m: m.group(1) + "\u0301", value)
     return value if len(value) <= 100 else ""
 
 

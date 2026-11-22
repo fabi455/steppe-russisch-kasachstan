@@ -9,7 +9,7 @@ jobs:
   build:
     name: Android + vollständige Offline-Web-App
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -40,8 +40,16 @@ jobs:
           node --check adaptive.js
           node --check dictionary/ui.js
           node --check dictionary/ru-de.js
-      - name: Install natural neural TTS engine
-        run: python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1'
+      - name: Install neural speech engines and local fallback voice
+        run: |
+          python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1' 'piper-tts==1.8.0'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          mkdir -p voice
+          cd voice
+          python3 -m piper.download_voices ru_RU-dmitri-medium
+          test -s ru_RU-dmitri-medium.onnx
+          test -s ru_RU-dmitri-medium.onnx.json
       - name: Generate all 320 Russian lesson MP3s
         run: |
           python3 tools/generate_audio.py

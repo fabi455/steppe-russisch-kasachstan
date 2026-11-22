@@ -13,7 +13,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / "dist"
-REVISION = int(os.environ.get("GITHUB_RUN_NUMBER", "1"))
+REVISION = int(os.environ.get("GITHUB_RUN_ID", "1"))
 
 def create():
     if REVISION <= 0:

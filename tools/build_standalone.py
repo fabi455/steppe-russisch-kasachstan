@@ -16,6 +16,8 @@ required = [
      "<script>\n" + (root / "content.js").read_text("utf-8") + "\n</script>"),
     ("<script src=\"dictionary/ui.js\"></script>",
      "<script>\n" + (root / "dictionary/ui.js").read_text("utf-8") + "\n</script>"),
+    ("<script src=\"adaptive.js\"></script>",
+     "<script>\\n" + (root / "adaptive.js").read_text("utf-8") + "\\n</script>"),
     ("<script src=\"app.js\"></script>",
      "<script>\n" + (root / "app.js").read_text("utf-8") + "\n</script>"),
 ]
@@ -32,8 +34,8 @@ if "window.STEPPE_LEXICON=" not in html:
 clips = {}
 for mp3 in sorted((root / "audio").glob("*.mp3")):
     clips[mp3.stem] = "data:audio/mpeg;base64," + base64.b64encode(mp3.read_bytes()).decode("ascii")
-if len(clips) != 128:
-    raise RuntimeError(f"Erwartet 128 Hörproben, gefunden {len(clips)}")
+if len(clips) != 320:
+    raise RuntimeError(f"Erwartet 320 Hörproben, gefunden {len(clips)}")
 if "<script>/* EMBED_AUDIO */</script>" not in html:
     raise RuntimeError("Audiomarker fehlt")
 html = html.replace("<script>/* EMBED_AUDIO */</script>",

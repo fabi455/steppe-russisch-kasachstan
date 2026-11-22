@@ -103,9 +103,43 @@ def legacy_pack(current):
         return count
 
 
+def recover_verified_shards(current):
+    """Recover successful Svetlana shard artifacts from the first failed batch.
+
+    Every shard artifact contains the original speaker identity receipt and
+    only the exact MP3 files generated during that job.
+    """
+    original_run="45068416828"
+    with tempfile.TemporaryDirectory() as d:
+        if not run("run","download",original_run,"--repo",REPO,
+                   "--pattern","svetlana-part-*","--dir",d):
+            return 0
+        receipts=list(Path(d).rglob("voice-shard-*.json"))
+        restored=0
+        for receipt in receipts:
+            record=json.loads(receipt.read_text("utf-8"))
+            if record.get("voice")!=VOICE:
+                raise RuntimeError(f"Unexpected voice in shard {receipt}")
+            for id in record.get("items",[]):
+                if id not in current:
+                    raise RuntimeError(f"Unexpected word ID in shard: {id}")
+                destination=AUDIO/(id+".mp3")
+                if destination.exists():
+                    continue
+                source=receipt.parent/(id+".mp3")
+                if not source.is_file():
+                    raise RuntimeError(f"Missing verified MP3 in shard: {id}")
+                restore_mp3(destination,source.read_bytes())
+                restored+=1
+        print(f"Reused {restored} completed Svetlana MP3s from {len(receipts)} previous shards",flush=True)
+        return restored
+
+
 if __name__=="__main__":
     AUDIO.mkdir(parents=True,exist_ok=True)
     current=read_ids(json.loads((ROOT/"content.json").read_text("utf-8")))
-    if not released_pack(current):
+    from_release = released_pack(current)
+    if not from_release:
         legacy_pack(current)
+        recover_verified_shards(current)
     print("Trusted Svetlana audio files:",len(list(AUDIO.glob("*.mp3"))),flush=True)

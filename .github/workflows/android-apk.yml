@@ -1,19 +1,31 @@
-name: Steppe Russisch 1.3.1 – Zusatzwort + 20 Lektionen + 56k-Wörterbuch
+name: Steppe Android + In-App-Aktualisierungen
 on:
   push:
     branches: [main]
+    paths:
+      - android/**
+      - app.js
+      - index.html
+      - adaptive.js
+      - dictionary/ui.js
+      - style.css
+      - sw.js
+      - tools/build_content_update.py
+      - tools/publish_content_update.py
+      - tools/build_standalone.py
+      - .github/workflows/android-apk.yml
   workflow_dispatch:
 concurrency:
   group: steppe-russisch-android-main
   cancel-in-progress: true
 permissions:
-  contents: read
+  contents: write
   actions: read
 jobs:
   build:
-    name: Android + vollständige Offline-Web-App
+    name: Android 1.4 + geprüftes Offline-Lernpaket
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 40
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,10 +48,10 @@ jobs:
           test -n "$SDK_MANAGER"
           yes | "$SDK_MANAGER" --licenses >/dev/null || true
           "$SDK_MANAGER" "platforms;android-35" "build-tools;35.0.0"
-      - name: Create verified offline Russian–German dictionary
+      - name: Generate verified Russian–German dictionary
         run: |
           python3 tools/build_dictionary.py
-          python3 -m py_compile tools/build_dictionary.py tools/build_standalone.py
+          python3 -m py_compile tools/build_dictionary.py tools/build_standalone.py tools/build_content_update.py tools/publish_content_update.py tools/generate_audio.py
           node --check app.js
           node --check adaptive.js
           node --check dictionary/ui.js
@@ -50,47 +62,88 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
           mkdir -p voice
-          cd voice
-          python3 -m piper.download_voices ru_RU-dmitri-medium
-          test -s ru_RU-dmitri-medium.onnx
-          test -s ru_RU-dmitri-medium.onnx.json
-      - name: Recover existing 128 high-quality Svetlana MP3s
+          (cd voice && python3 -m piper.download_voices ru_RU-dmitri-medium)
+      - name: Restore existing verified neural MP3s
         env:
           GH_TOKEN: ${{ github.token }}
         run: bash tools/restore_legacy_audio.sh
-      - name: Generate missing lesson MP3s with local neural voice
+      - name: Generate missing neural MP3s
         env:
           STEPPE_AUDIO_MODE: local
         run: |
           python3 tools/generate_audio.py
-          test "$(find audio -name '*.mp3' | wc -l)" -eq 321
           python3 - <<'PY'
           import json
           from pathlib import Path
           from mutagen.mp3 import MP3
-          files = list(Path('audio').glob('*.mp3'))
-          assert len(files) == 321, len(files)
-          for file in files:
-              track = MP3(str(file))
-              assert track.info.length > 0.1, file
-          print('Validierte 321 MP3-Hörproben', flush=True)
+          lessons=json.loads(Path('content.json').read_text(encoding='utf-8'))
+          ids=[w['id'] for l in lessons for w in l['words']+l['phrases']]
+          assert len(ids)>=321 and len(set(ids))==len(ids)
+          for id in ids:
+              f=Path('audio')/(id+'.mp3')
+              assert f.is_file() and MP3(str(f)).info.length>0.1,f
+          print('Validierte',len(ids),'natürlichere MP3-Hörproben')
           PY
+      - name: Build signed content-only package and native revision metadata
+        run: python3 tools/build_content_update.py
       - name: Build full offline browser edition
         run: python3 tools/build_standalone.py
-      - name: Build installable Android APK
+      - name: Build installable Android test APK
         working-directory: android
-        run: gradle --no-daemon :app:assembleDebug
-      - name: Upload installable Android APK
+        run: |
+          gradle --no-daemon :app:assembleDebug -PsteppeVersionCode=$((1000 + GITHUB_RUN_NUMBER)) -PsteppeVersionName="1.4.${GITHUB_RUN_NUMBER}"
+      - name: Upload Android test APK
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Russisch-1.3.1-Wort-APK
+          name: Steppe-1.4-Update-System-Test-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 90
-      - name: Upload portable offline HTML edition
+      - name: Restore optional stable release signing key from GitHub Secrets
+        env:
+          STEPPE_KEYSTORE_B64: ${{ secrets.STEPPE_KEYSTORE_B64 }}
+          STEPPE_STORE_PASSWORD_SECRET: ${{ secrets.STEPPE_STORE_PASSWORD }}
+          STEPPE_KEY_PASSWORD_SECRET: ${{ secrets.STEPPE_KEY_PASSWORD }}
+          STEPPE_KEY_ALIAS_SECRET: ${{ secrets.STEPPE_KEY_ALIAS }}
+        run: |
+          if [ -n "$STEPPE_KEYSTORE_B64" ]; then
+            echo "$STEPPE_KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/steppe-release.jks"
+            echo "STEPPE_KEYSTORE_PATH=$RUNNER_TEMP/steppe-release.jks" >> "$GITHUB_ENV"
+            echo "STEPPE_STORE_PASSWORD=$STEPPE_STORE_PASSWORD_SECRET" >> "$GITHUB_ENV"
+            echo "STEPPE_KEY_PASSWORD=$STEPPE_KEY_PASSWORD_SECRET" >> "$GITHUB_ENV"
+            echo "STEPPE_KEY_ALIAS=$STEPPE_KEY_ALIAS_SECRET" >> "$GITHUB_ENV"
+            echo "Release signing configured."
+          else
+            echo "No persistent signing key configured: debug APK only. App-code upgrades still require a one-time GitHub Secrets setup."
+          fi
+      - name: Build stable-signed release APK
+        if: env.STEPPE_KEYSTORE_PATH != ''
+        working-directory: android
+        run: |
+          gradle --no-daemon :app:assembleRelease -PsteppeVersionCode=$((1000 + GITHUB_RUN_NUMBER)) -PsteppeVersionName="1.4.${GITHUB_RUN_NUMBER}"
+      - name: Publish stable-signed Android update
+        if: env.STEPPE_KEYSTORE_PATH != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="1.4.${GITHUB_RUN_NUMBER}"
+          gh release create "v$VERSION" "android/app/build/outputs/apk/release/app-release.apk#Steppe-Russisch-$VERSION.apk" \
+            --repo "$GITHUB_REPOSITORY" --title "Steppe Russisch $VERSION" --notes "Stabil signierte App-Aktualisierung. Gleicher App-Signaturschlüssel für alle folgenden Versionen erforderlich." --latest
+      - name: Publish content package for in-app updates
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/publish_content_update.py
+      - name: Upload complete offline HTML app
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Russisch-1.3.1-Offline-Web
-          path: dist/Steppe-Russisch-1.3.1-Offline.html
+          name: Steppe-1.4-Offline-Web
+          path: dist/Steppe-Russisch-1.4-Offline.html
+          if-no-files-found: error
+          retention-days: 90
+      - name: Upload content-only ZIP for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: Steppe-1.4-Lernpaket
+          path: dist/steppe-content.zip
           if-no-files-found: error
           retention-days: 90

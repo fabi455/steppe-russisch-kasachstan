@@ -129,10 +129,9 @@ jobs:
           VERSION="1.4.${GITHUB_RUN_NUMBER}"
           gh release create "v$VERSION" "android/app/build/outputs/apk/release/app-release.apk#Steppe-Russisch-$VERSION.apk" \
             --repo "$GITHUB_REPOSITORY" --title "Steppe Russisch $VERSION" --notes "Stabil signierte App-Aktualisierung. Gleicher App-Signaturschlüssel für alle folgenden Versionen erforderlich." --latest
-      - name: Publish content package for in-app updates
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 tools/publish_content_update.py
+      # Content packages are published exclusively by content-updates.yml after all
+      # 321 clips pass the single-Svetlana-voice verification. Never overwrite those
+      # files from a potentially mixed-voice Android build.
       - name: Upload complete offline HTML app
         uses: actions/upload-artifact@v4
         with:

@@ -750,5 +750,1133 @@
       }
     ],
     "id": "l8"
+  },
+  {
+    "title": "Zeit & Verabredungen",
+    "subtitle": "Uhrzeiten, Tage und Termine",
+    "symbol": "⏰",
+    "minutes": 12,
+    "tag": "Alltag",
+    "intro": "Verabrede dich, verstehe Uhrzeiten und erkundige dich nach Terminen.",
+    "tip": "Bei Zeitangaben werden час, часа und часов nach der Zahl unterschiedlich verwendet.",
+    "words": [
+      {
+        "id": "w9_01",
+        "term": "сегодня",
+        "meaning": "heute"
+      },
+      {
+        "id": "w9_02",
+        "term": "завтра",
+        "meaning": "morgen"
+      },
+      {
+        "id": "w9_03",
+        "term": "вчера",
+        "meaning": "gestern"
+      },
+      {
+        "id": "w9_04",
+        "term": "сейчас",
+        "meaning": "jetzt"
+      },
+      {
+        "id": "w9_05",
+        "term": "позже",
+        "meaning": "später"
+      },
+      {
+        "id": "w9_06",
+        "term": "рано",
+        "meaning": "früh"
+      },
+      {
+        "id": "w9_07",
+        "term": "поздно",
+        "meaning": "spät"
+      },
+      {
+        "id": "w9_08",
+        "term": "час",
+        "meaning": "Stunde; Uhr"
+      },
+      {
+        "id": "w9_09",
+        "term": "минута",
+        "meaning": "Minute"
+      },
+      {
+        "id": "w9_10",
+        "term": "неделя",
+        "meaning": "Woche"
+      },
+      {
+        "id": "w9_11",
+        "term": "встреча",
+        "meaning": "Treffen; Termin"
+      },
+      {
+        "id": "w9_12",
+        "term": "расписание",
+        "meaning": "Fahrplan; Stundenplan"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p9_01",
+        "term": "Который сейчас час?",
+        "meaning": "Wie spät ist es jetzt?"
+      },
+      {
+        "id": "p9_02",
+        "term": "Давайте встретимся завтра в десять.",
+        "meaning": "Treffen wir uns morgen um zehn."
+      },
+      {
+        "id": "p9_03",
+        "term": "У меня встреча в три часа.",
+        "meaning": "Ich habe um drei Uhr einen Termin."
+      },
+      {
+        "id": "p9_04",
+        "term": "Я опаздываю на пять минут.",
+        "meaning": "Ich komme fünf Minuten zu spät."
+      }
+    ],
+    "id": "l9"
+  },
+  {
+    "title": "Wetter & Kleidung",
+    "subtitle": "Über Wetter und Jahreszeiten sprechen",
+    "symbol": "☀",
+    "minutes": 12,
+    "tag": "Alltag",
+    "intro": "Heiße Sommer und kalte Winter: Plane Aktivitäten und kaufe passende Kleidung.",
+    "tip": "Сегодня холодно bedeutet: Heute ist es kalt. Mit мне холодно sagst du: Mir ist kalt.",
+    "words": [
+      {
+        "id": "w10_01",
+        "term": "погода",
+        "meaning": "Wetter"
+      },
+      {
+        "id": "w10_02",
+        "term": "солнце",
+        "meaning": "Sonne"
+      },
+      {
+        "id": "w10_03",
+        "term": "дождь",
+        "meaning": "Regen"
+      },
+      {
+        "id": "w10_04",
+        "term": "снег",
+        "meaning": "Schnee"
+      },
+      {
+        "id": "w10_05",
+        "term": "ветер",
+        "meaning": "Wind"
+      },
+      {
+        "id": "w10_06",
+        "term": "холодно",
+        "meaning": "kalt (Wetter)"
+      },
+      {
+        "id": "w10_07",
+        "term": "жарко",
+        "meaning": "heiß (Wetter)"
+      },
+      {
+        "id": "w10_08",
+        "term": "прохладно",
+        "meaning": "kühl"
+      },
+      {
+        "id": "w10_09",
+        "term": "куртка",
+        "meaning": "Jacke"
+      },
+      {
+        "id": "w10_10",
+        "term": "обувь",
+        "meaning": "Schuhe; Schuhwerk"
+      },
+      {
+        "id": "w10_11",
+        "term": "зонт",
+        "meaning": "Regenschirm"
+      },
+      {
+        "id": "w10_12",
+        "term": "шапка",
+        "meaning": "Mütze"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p10_01",
+        "term": "Какая сегодня погода?",
+        "meaning": "Wie ist das Wetter heute?"
+      },
+      {
+        "id": "p10_02",
+        "term": "Завтра будет снег.",
+        "meaning": "Morgen wird es schneien."
+      },
+      {
+        "id": "p10_03",
+        "term": "Мне нужна тёплая куртка.",
+        "meaning": "Ich brauche eine warme Jacke."
+      },
+      {
+        "id": "p10_04",
+        "term": "На улице очень холодно.",
+        "meaning": "Draußen ist es sehr kalt."
+      }
+    ],
+    "id": "l10"
+  },
+  {
+    "title": "Metro, Bus & Taxi",
+    "subtitle": "Sicher im Nahverkehr unterwegs",
+    "symbol": "🚇",
+    "minutes": 12,
+    "tag": "Unterwegs",
+    "intro": "Finde in Almaty, Astana und anderen Städten die richtige Haltestelle und Linie.",
+    "tip": "Ein Verkehrsmittel kann по-русски идти: Этот автобус идёт до центра? (Fährt dieser Bus ins Zentrum?)",
+    "words": [
+      {
+        "id": "w11_01",
+        "term": "метро",
+        "meaning": "Metro; U-Bahn"
+      },
+      {
+        "id": "w11_02",
+        "term": "автобус",
+        "meaning": "Bus"
+      },
+      {
+        "id": "w11_03",
+        "term": "остановка",
+        "meaning": "Haltestelle"
+      },
+      {
+        "id": "w11_04",
+        "term": "билет",
+        "meaning": "Fahrkarte; Ticket"
+      },
+      {
+        "id": "w11_05",
+        "term": "проезд",
+        "meaning": "Fahrt; Fahrpreis"
+      },
+      {
+        "id": "w11_06",
+        "term": "пересадка",
+        "meaning": "Umstieg"
+      },
+      {
+        "id": "w11_07",
+        "term": "водитель",
+        "meaning": "Fahrer"
+      },
+      {
+        "id": "w11_08",
+        "term": "пассажир",
+        "meaning": "Fahrgast"
+      },
+      {
+        "id": "w11_09",
+        "term": "вокзал",
+        "meaning": "Bahnhof"
+      },
+      {
+        "id": "w11_10",
+        "term": "маршрут",
+        "meaning": "Route; Linie"
+      },
+      {
+        "id": "w11_11",
+        "term": "станция",
+        "meaning": "Station"
+      },
+      {
+        "id": "w11_12",
+        "term": "пробка",
+        "meaning": "Stau"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p11_01",
+        "term": "Где ближайшая станция метро?",
+        "meaning": "Wo ist die nächste Metrostation?"
+      },
+      {
+        "id": "p11_02",
+        "term": "Сколько стоит проезд?",
+        "meaning": "Wie viel kostet die Fahrt?"
+      },
+      {
+        "id": "p11_03",
+        "term": "Этот автобус идёт до центра?",
+        "meaning": "Fährt dieser Bus ins Stadtzentrum?"
+      },
+      {
+        "id": "p11_04",
+        "term": "Остановите, пожалуйста, здесь.",
+        "meaning": "Halten Sie bitte hier an."
+      }
+    ],
+    "id": "l11"
+  },
+  {
+    "title": "Wege & Orientierung",
+    "subtitle": "Richtungen verstehen und finden",
+    "symbol": "➤",
+    "minutes": 12,
+    "tag": "Unterwegs",
+    "intro": "Nach dem Weg fragen, Abzweigungen finden und Adressen zeigen.",
+    "tip": "Die drei Richtungen: прямо (geradeaus), налево (links) und направо (rechts).",
+    "words": [
+      {
+        "id": "w12_01",
+        "term": "прямо",
+        "meaning": "geradeaus"
+      },
+      {
+        "id": "w12_02",
+        "term": "налево",
+        "meaning": "nach links"
+      },
+      {
+        "id": "w12_03",
+        "term": "направо",
+        "meaning": "nach rechts"
+      },
+      {
+        "id": "w12_04",
+        "term": "рядом",
+        "meaning": "in der Nähe; daneben"
+      },
+      {
+        "id": "w12_05",
+        "term": "далеко",
+        "meaning": "weit weg"
+      },
+      {
+        "id": "w12_06",
+        "term": "близко",
+        "meaning": "nah"
+      },
+      {
+        "id": "w12_07",
+        "term": "перекрёсток",
+        "meaning": "Kreuzung"
+      },
+      {
+        "id": "w12_08",
+        "term": "светофор",
+        "meaning": "Ampel"
+      },
+      {
+        "id": "w12_09",
+        "term": "улица",
+        "meaning": "Straße"
+      },
+      {
+        "id": "w12_10",
+        "term": "площадь",
+        "meaning": "Platz"
+      },
+      {
+        "id": "w12_11",
+        "term": "карта",
+        "meaning": "Karte"
+      },
+      {
+        "id": "w12_12",
+        "term": "адрес",
+        "meaning": "Adresse"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p12_01",
+        "term": "Как пройти к музею?",
+        "meaning": "Wie komme ich zum Museum?"
+      },
+      {
+        "id": "p12_02",
+        "term": "Идите прямо, потом направо.",
+        "meaning": "Gehen Sie geradeaus, dann nach rechts."
+      },
+      {
+        "id": "p12_03",
+        "term": "Это далеко отсюда?",
+        "meaning": "Ist es von hier weit?"
+      },
+      {
+        "id": "p12_04",
+        "term": "Покажите, пожалуйста, на карте.",
+        "meaning": "Zeigen Sie es mir bitte auf der Karte."
+      }
+    ],
+    "id": "l12"
+  },
+  {
+    "title": "Apotheke & Gesundheit",
+    "subtitle": "Beschwerden und Hilfe ausdrücken",
+    "symbol": "✚",
+    "minutes": 12,
+    "tag": "Wichtig",
+    "intro": "Beschreibe einfache Beschwerden und finde die nächste Apotheke oder Praxis.",
+    "tip": "Bei Schmerzen: У меня болит голова. (Mein Kopf tut weh.) Ärztlichen Rat ersetzen diese Sätze nicht.",
+    "words": [
+      {
+        "id": "w13_01",
+        "term": "аптека",
+        "meaning": "Apotheke"
+      },
+      {
+        "id": "w13_02",
+        "term": "врач",
+        "meaning": "Arzt; Ärztin"
+      },
+      {
+        "id": "w13_03",
+        "term": "больница",
+        "meaning": "Krankenhaus"
+      },
+      {
+        "id": "w13_04",
+        "term": "температура",
+        "meaning": "Temperatur; Fieber"
+      },
+      {
+        "id": "w13_05",
+        "term": "боль",
+        "meaning": "Schmerz"
+      },
+      {
+        "id": "w13_06",
+        "term": "лекарство",
+        "meaning": "Medikament"
+      },
+      {
+        "id": "w13_07",
+        "term": "рецепт",
+        "meaning": "ärztliches Rezept"
+      },
+      {
+        "id": "w13_08",
+        "term": "кашель",
+        "meaning": "Husten"
+      },
+      {
+        "id": "w13_09",
+        "term": "голова",
+        "meaning": "Kopf"
+      },
+      {
+        "id": "w13_10",
+        "term": "живот",
+        "meaning": "Bauch"
+      },
+      {
+        "id": "w13_11",
+        "term": "аллергия",
+        "meaning": "Allergie"
+      },
+      {
+        "id": "w13_12",
+        "term": "помощь",
+        "meaning": "Hilfe"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p13_01",
+        "term": "Где здесь ближайшая аптека?",
+        "meaning": "Wo ist hier die nächste Apotheke?"
+      },
+      {
+        "id": "p13_02",
+        "term": "У меня болит голова.",
+        "meaning": "Ich habe Kopfschmerzen."
+      },
+      {
+        "id": "p13_03",
+        "term": "Мне нужно лекарство от кашля.",
+        "meaning": "Ich brauche ein Mittel gegen Husten."
+      },
+      {
+        "id": "p13_04",
+        "term": "У меня аллергия на орехи.",
+        "meaning": "Ich habe eine Nussallergie."
+      }
+    ],
+    "id": "l13"
+  },
+  {
+    "title": "Arbeit & Studium",
+    "subtitle": "Gespräche im Büro und an der Uni",
+    "symbol": "⌘",
+    "minutes": 12,
+    "tag": "Beruf",
+    "intro": "Über Arbeit, Projekte und Kurse in Kasachstan sprechen.",
+    "tip": "я работаю bedeutet ich arbeite; я учусь bedeutet ich studiere oder lerne.",
+    "words": [
+      {
+        "id": "w14_01",
+        "term": "работа",
+        "meaning": "Arbeit"
+      },
+      {
+        "id": "w14_02",
+        "term": "офис",
+        "meaning": "Büro"
+      },
+      {
+        "id": "w14_03",
+        "term": "коллега",
+        "meaning": "Kollege; Kollegin"
+      },
+      {
+        "id": "w14_04",
+        "term": "начальник",
+        "meaning": "Vorgesetzter; Chef"
+      },
+      {
+        "id": "w14_05",
+        "term": "университет",
+        "meaning": "Universität"
+      },
+      {
+        "id": "w14_06",
+        "term": "студент",
+        "meaning": "Student"
+      },
+      {
+        "id": "w14_07",
+        "term": "преподаватель",
+        "meaning": "Lehrkraft; Dozent"
+      },
+      {
+        "id": "w14_08",
+        "term": "занятие",
+        "meaning": "Unterricht; Lehrveranstaltung"
+      },
+      {
+        "id": "w14_09",
+        "term": "задача",
+        "meaning": "Aufgabe"
+      },
+      {
+        "id": "w14_10",
+        "term": "проект",
+        "meaning": "Projekt"
+      },
+      {
+        "id": "w14_11",
+        "term": "документ",
+        "meaning": "Dokument"
+      },
+      {
+        "id": "w14_12",
+        "term": "компьютер",
+        "meaning": "Computer"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p14_01",
+        "term": "Я работаю в Алматы.",
+        "meaning": "Ich arbeite in Almaty."
+      },
+      {
+        "id": "p14_02",
+        "term": "Где находится университет?",
+        "meaning": "Wo befindet sich die Universität?"
+      },
+      {
+        "id": "p14_03",
+        "term": "У нас сегодня важная встреча.",
+        "meaning": "Wir haben heute ein wichtiges Treffen."
+      },
+      {
+        "id": "p14_04",
+        "term": "Я изучаю русский язык.",
+        "meaning": "Ich lerne die russische Sprache."
+      }
+    ],
+    "id": "l14"
+  },
+  {
+    "title": "Handy & Internet",
+    "subtitle": "SIM-Karte, WLAN und Telefonate",
+    "symbol": "📱",
+    "minutes": 12,
+    "tag": "Alltag",
+    "intro": "Hole dir eine lokale SIM-Karte und frage nach dem WLAN-Passwort.",
+    "tip": "Bei WLAN sagt man häufig вайфай; мобильный интернет bedeutet mobiles Internet.",
+    "words": [
+      {
+        "id": "w15_01",
+        "term": "телефон",
+        "meaning": "Telefon"
+      },
+      {
+        "id": "w15_02",
+        "term": "сим-карта",
+        "meaning": "SIM-Karte"
+      },
+      {
+        "id": "w15_03",
+        "term": "интернет",
+        "meaning": "Internet"
+      },
+      {
+        "id": "w15_04",
+        "term": "вайфай",
+        "meaning": "WLAN"
+      },
+      {
+        "id": "w15_05",
+        "term": "пароль",
+        "meaning": "Passwort"
+      },
+      {
+        "id": "w15_06",
+        "term": "связь",
+        "meaning": "Verbindung; Mobilfunk"
+      },
+      {
+        "id": "w15_07",
+        "term": "зарядка",
+        "meaning": "Ladegerät; Laden"
+      },
+      {
+        "id": "w15_08",
+        "term": "батарея",
+        "meaning": "Akku; Batterie"
+      },
+      {
+        "id": "w15_09",
+        "term": "номер",
+        "meaning": "Nummer"
+      },
+      {
+        "id": "w15_10",
+        "term": "сообщение",
+        "meaning": "Nachricht"
+      },
+      {
+        "id": "w15_11",
+        "term": "звонок",
+        "meaning": "Anruf"
+      },
+      {
+        "id": "w15_12",
+        "term": "приложение",
+        "meaning": "App; Anwendung"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p15_01",
+        "term": "У вас есть вайфай?",
+        "meaning": "Gibt es bei Ihnen WLAN?"
+      },
+      {
+        "id": "p15_02",
+        "term": "Какой пароль от вайфая?",
+        "meaning": "Wie lautet das WLAN-Passwort?"
+      },
+      {
+        "id": "p15_03",
+        "term": "Мне нужна сим-карта с интернетом.",
+        "meaning": "Ich brauche eine SIM-Karte mit Internet."
+      },
+      {
+        "id": "p15_04",
+        "term": "Мой телефон разрядился.",
+        "meaning": "Mein Handy ist leer."
+      }
+    ],
+    "id": "l15"
+  },
+  {
+    "title": "Kleidung & Einkaufen",
+    "subtitle": "Größen, Farben und Anprobieren",
+    "symbol": "🛍",
+    "minutes": 12,
+    "tag": "Einkaufen",
+    "intro": "Kaufe Kleidung auf dem Bazar oder in einem Einkaufszentrum.",
+    "tip": "Мне нужен … (maskulin) und мне нужна … (feminin) richten sich nach dem russischen Substantiv.",
+    "words": [
+      {
+        "id": "w16_01",
+        "term": "размер",
+        "meaning": "Größe"
+      },
+      {
+        "id": "w16_02",
+        "term": "цвет",
+        "meaning": "Farbe"
+      },
+      {
+        "id": "w16_03",
+        "term": "рубашка",
+        "meaning": "Hemd"
+      },
+      {
+        "id": "w16_04",
+        "term": "футболка",
+        "meaning": "T-Shirt"
+      },
+      {
+        "id": "w16_05",
+        "term": "брюки",
+        "meaning": "Hose"
+      },
+      {
+        "id": "w16_06",
+        "term": "платье",
+        "meaning": "Kleid"
+      },
+      {
+        "id": "w16_07",
+        "term": "обувь",
+        "meaning": "Schuhe"
+      },
+      {
+        "id": "w16_08",
+        "term": "примерочная",
+        "meaning": "Umkleidekabine"
+      },
+      {
+        "id": "w16_09",
+        "term": "скидка",
+        "meaning": "Rabatt"
+      },
+      {
+        "id": "w16_10",
+        "term": "дорогой",
+        "meaning": "teuer"
+      },
+      {
+        "id": "w16_11",
+        "term": "дешёвый",
+        "meaning": "günstig; billig"
+      },
+      {
+        "id": "w16_12",
+        "term": "касса",
+        "meaning": "Kasse"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p16_01",
+        "term": "У вас есть размер побольше?",
+        "meaning": "Haben Sie eine größere Größe?"
+      },
+      {
+        "id": "p16_02",
+        "term": "Можно это примерить?",
+        "meaning": "Kann ich das anprobieren?"
+      },
+      {
+        "id": "p16_03",
+        "term": "Есть другой цвет?",
+        "meaning": "Gibt es eine andere Farbe?"
+      },
+      {
+        "id": "p16_04",
+        "term": "Можно оплатить картой?",
+        "meaning": "Kann ich mit Karte bezahlen?"
+      }
+    ],
+    "id": "l16"
+  },
+  {
+    "title": "Bank & Geldwechsel",
+    "subtitle": "Bezahlen, Tenge und Geld abheben",
+    "symbol": "₸",
+    "minutes": 12,
+    "tag": "Einkaufen",
+    "intro": "Geld abheben, Wechselstuben finden und Bezahlmöglichkeiten klären.",
+    "tip": "Im Alltag in Kasachstan wird mit Tenge (тенге) bezahlt, nicht mit Rubel.",
+    "words": [
+      {
+        "id": "w17_01",
+        "term": "тенге",
+        "meaning": "Tenge (Währung)"
+      },
+      {
+        "id": "w17_02",
+        "term": "банкомат",
+        "meaning": "Geldautomat"
+      },
+      {
+        "id": "w17_03",
+        "term": "банк",
+        "meaning": "Bank"
+      },
+      {
+        "id": "w17_04",
+        "term": "наличные",
+        "meaning": "Bargeld"
+      },
+      {
+        "id": "w17_05",
+        "term": "карта",
+        "meaning": "Karte; Bankkarte"
+      },
+      {
+        "id": "w17_06",
+        "term": "обмен",
+        "meaning": "Umtausch; Wechsel"
+      },
+      {
+        "id": "w17_07",
+        "term": "валюта",
+        "meaning": "Währung"
+      },
+      {
+        "id": "w17_08",
+        "term": "курс",
+        "meaning": "Wechselkurs"
+      },
+      {
+        "id": "w17_09",
+        "term": "комиссия",
+        "meaning": "Gebühr; Provision"
+      },
+      {
+        "id": "w17_10",
+        "term": "сдача",
+        "meaning": "Wechselgeld"
+      },
+      {
+        "id": "w17_11",
+        "term": "чек",
+        "meaning": "Kassenbon; Beleg"
+      },
+      {
+        "id": "w17_12",
+        "term": "оплата",
+        "meaning": "Bezahlung"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p17_01",
+        "term": "Где ближайший банкомат?",
+        "meaning": "Wo ist der nächste Geldautomat?"
+      },
+      {
+        "id": "p17_02",
+        "term": "Я хочу обменять евро на тенге.",
+        "meaning": "Ich möchte Euro in Tenge wechseln."
+      },
+      {
+        "id": "p17_03",
+        "term": "Какая комиссия за обмен?",
+        "meaning": "Wie hoch ist die Wechselgebühr?"
+      },
+      {
+        "id": "p17_04",
+        "term": "Можно заплатить наличными?",
+        "meaning": "Kann ich bar bezahlen?"
+      }
+    ],
+    "id": "l17"
+  },
+  {
+    "title": "Natur & Ausflüge",
+    "subtitle": "Berge, Seen und Wochenendpläne",
+    "symbol": "⛰",
+    "minutes": 12,
+    "tag": "Reisen",
+    "intro": "Plane Ausflüge in die Berge, an Seen und zu Naturzielen Kasachstans.",
+    "tip": "Поехать kann eine geplante Fahrt ausdrücken: Я хочу поехать в горы. (Ich möchte in die Berge fahren.)",
+    "words": [
+      {
+        "id": "w18_01",
+        "term": "гора",
+        "meaning": "Berg"
+      },
+      {
+        "id": "w18_02",
+        "term": "озеро",
+        "meaning": "See"
+      },
+      {
+        "id": "w18_03",
+        "term": "река",
+        "meaning": "Fluss"
+      },
+      {
+        "id": "w18_04",
+        "term": "степь",
+        "meaning": "Steppe"
+      },
+      {
+        "id": "w18_05",
+        "term": "природа",
+        "meaning": "Natur"
+      },
+      {
+        "id": "w18_06",
+        "term": "поход",
+        "meaning": "Wanderung; Ausflug"
+      },
+      {
+        "id": "w18_07",
+        "term": "тропа",
+        "meaning": "Pfad; Wanderweg"
+      },
+      {
+        "id": "w18_08",
+        "term": "лес",
+        "meaning": "Wald"
+      },
+      {
+        "id": "w18_09",
+        "term": "вершина",
+        "meaning": "Gipfel"
+      },
+      {
+        "id": "w18_10",
+        "term": "выходные",
+        "meaning": "Wochenende"
+      },
+      {
+        "id": "w18_11",
+        "term": "фотоаппарат",
+        "meaning": "Fotoapparat"
+      },
+      {
+        "id": "w18_12",
+        "term": "рюкзак",
+        "meaning": "Rucksack"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p18_01",
+        "term": "Я хочу поехать в горы.",
+        "meaning": "Ich möchte in die Berge fahren."
+      },
+      {
+        "id": "p18_02",
+        "term": "Как добраться до озера?",
+        "meaning": "Wie kommt man zum See?"
+      },
+      {
+        "id": "p18_03",
+        "term": "Пойдём гулять в выходные?",
+        "meaning": "Gehen wir am Wochenende spazieren?"
+      },
+      {
+        "id": "p18_04",
+        "term": "Здесь очень красивая природа.",
+        "meaning": "Die Natur ist hier sehr schön."
+      }
+    ],
+    "id": "l18"
+  },
+  {
+    "title": "Wohnung & Unterkunft",
+    "subtitle": "Mieten, Ausstattung und Reparaturen",
+    "symbol": "⌂",
+    "minutes": 12,
+    "tag": "Alltag",
+    "intro": "Frage nach Wohnungen, Nebenkosten und Reparaturen.",
+    "tip": "Квартира bedeutet Wohnung; комната ist ein Zimmer. Аренда bedeutet Miete.",
+    "words": [
+      {
+        "id": "w19_01",
+        "term": "квартира",
+        "meaning": "Wohnung"
+      },
+      {
+        "id": "w19_02",
+        "term": "комната",
+        "meaning": "Zimmer"
+      },
+      {
+        "id": "w19_03",
+        "term": "аренда",
+        "meaning": "Miete"
+      },
+      {
+        "id": "w19_04",
+        "term": "хозяин",
+        "meaning": "Eigentümer; Vermieter"
+      },
+      {
+        "id": "w19_05",
+        "term": "договор",
+        "meaning": "Vertrag"
+      },
+      {
+        "id": "w19_06",
+        "term": "ключ",
+        "meaning": "Schlüssel"
+      },
+      {
+        "id": "w19_07",
+        "term": "этаж",
+        "meaning": "Etage; Stockwerk"
+      },
+      {
+        "id": "w19_08",
+        "term": "лифт",
+        "meaning": "Aufzug"
+      },
+      {
+        "id": "w19_09",
+        "term": "отопление",
+        "meaning": "Heizung"
+      },
+      {
+        "id": "w19_10",
+        "term": "горячая вода",
+        "meaning": "Warmwasser"
+      },
+      {
+        "id": "w19_11",
+        "term": "сосед",
+        "meaning": "Nachbar"
+      },
+      {
+        "id": "w19_12",
+        "term": "ремонт",
+        "meaning": "Reparatur; Renovierung"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p19_01",
+        "term": "Сколько стоит аренда в месяц?",
+        "meaning": "Wie viel kostet die Miete im Monat?"
+      },
+      {
+        "id": "p19_02",
+        "term": "Есть ли горячая вода?",
+        "meaning": "Gibt es Warmwasser?"
+      },
+      {
+        "id": "p19_03",
+        "term": "У меня не работает отопление.",
+        "meaning": "Meine Heizung funktioniert nicht."
+      },
+      {
+        "id": "p19_04",
+        "term": "Можно посмотреть квартиру?",
+        "meaning": "Kann ich die Wohnung besichtigen?"
+      }
+    ],
+    "id": "l19"
+  },
+  {
+    "title": "Probleme & Notfälle",
+    "subtitle": "Sicher und höflich Hilfe holen",
+    "symbol": "!",
+    "minutes": 12,
+    "tag": "Wichtig",
+    "intro": "Bei Verlust, Problemen oder dringenden Situationen um Hilfe bitten.",
+    "tip": "Где находится …? bedeutet Wo befindet sich …? In echten Notfällen wende dich an lokale Rettungsdienste.",
+    "words": [
+      {
+        "id": "w20_01",
+        "term": "полиция",
+        "meaning": "Polizei"
+      },
+      {
+        "id": "w20_02",
+        "term": "пожар",
+        "meaning": "Feuer; Brand"
+      },
+      {
+        "id": "w20_03",
+        "term": "скорая помощь",
+        "meaning": "Rettungswagen; Notarzt"
+      },
+      {
+        "id": "w20_04",
+        "term": "опасно",
+        "meaning": "gefährlich"
+      },
+      {
+        "id": "w20_05",
+        "term": "потерял",
+        "meaning": "verloren (Sprecher männlich)"
+      },
+      {
+        "id": "w20_06",
+        "term": "паспорт",
+        "meaning": "Reisepass"
+      },
+      {
+        "id": "w20_07",
+        "term": "кошелёк",
+        "meaning": "Portemonnaie"
+      },
+      {
+        "id": "w20_08",
+        "term": "документы",
+        "meaning": "Dokumente"
+      },
+      {
+        "id": "w20_09",
+        "term": "проблема",
+        "meaning": "Problem"
+      },
+      {
+        "id": "w20_10",
+        "term": "случай",
+        "meaning": "Fall; Vorfall"
+      },
+      {
+        "id": "w20_11",
+        "term": "безопасно",
+        "meaning": "sicher"
+      },
+      {
+        "id": "w20_12",
+        "term": "объяснить",
+        "meaning": "erklären"
+      }
+    ],
+    "phrases": [
+      {
+        "id": "p20_01",
+        "term": "Я потерял свой паспорт.",
+        "meaning": "Ich habe meinen Reisepass verloren (Sprecher männlich)."
+      },
+      {
+        "id": "p20_02",
+        "term": "Позвоните в полицию, пожалуйста.",
+        "meaning": "Rufen Sie bitte die Polizei."
+      },
+      {
+        "id": "p20_03",
+        "term": "Мне нужна срочная помощь.",
+        "meaning": "Ich brauche dringend Hilfe."
+      },
+      {
+        "id": "p20_04",
+        "term": "Объясните, пожалуйста, медленнее.",
+        "meaning": "Erklären Sie es bitte langsamer."
+      }
+    ],
+    "id": "l20"
   }
 ]

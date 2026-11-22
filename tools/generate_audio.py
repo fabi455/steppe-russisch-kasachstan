@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate 320 offline Russian MP3 clips with neural TTS and a reliable fallback.
 
-Preferred voice: Microsoft Edge Svetlana Neural (unofficial endpoint, may throttle).
-Fallback: offline Piper "ru_RU-dmitri-medium" model (CC0 training data).
+Preferred existing audio: 128 Svetlana Neural samples from the previous verified APK.
+New clips: offline Piper ru_RU-dmitri-medium neural model, no network throttling.
 Only build tools need external services. Android playback is always offline.
 """
 import asyncio
@@ -64,6 +64,11 @@ async def one(item, sem):
     if valid_mp3(destination):
         return item["id"], "cached"
     async with sem:
+        if os.environ.get("STEPPE_AUDIO_MODE", "").strip().lower() in ("local", "piper"):
+            # Offline neural speaker. No network or external TTS throttling.
+            await asyncio.to_thread(piper_speech, item, destination)
+            print("Piper-Dmitri Neural", item["id"], item["term"][:36], flush=True)
+            return item["id"], "PiperDmitri"
         part = AUDIO / (item["id"] + ".partial.mp3")
         for attempt in range(2):
             try:

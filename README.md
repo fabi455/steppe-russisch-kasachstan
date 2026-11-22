@@ -29,7 +29,7 @@ Die ursprünglichen acht Lektionen bleiben bestehen. Zwölf zusätzliche Lektion
 11. Wohnung & Unterkunft
 12. Probleme & Notfälle
 
-Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die 320 eingebetteten MP3s werden beim Build bevorzugt durch die neuronale russische Stimme **Svetlana** erzeugt. Falls dieser externe Sprachdienst einzelne Aufnahmen nicht liefert, nutzt der Build als Reserve das lokal laufende neuronale Piper-Modell **Dmitri** (Sprachdatensatz CC0). Die Stimmen sind synthetisch, keine echten Sprecheraufnahmen. Die Tonfarbe kann deshalb in einzelnen Hörproben variieren. Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
+Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die App übernimmt möglichst die **128 ursprünglichen Svetlana-Neural-Hörproben** aus dem bewährten Build von Version 1.1. Die **192 neuen Hörproben** entstehen zuverlässig offline durch das neuronale russische Piper-Modell **Dmitri** (Modelldokumentation siehe unten). Sollte das frühere Build-Artefakt nicht mehr verfügbar sein, erzeugt Piper auch die bisherigen 128 Clips neu. Alle Hörproben sind synthetisch, keine Aufnahmen echter Muttersprachler; zwischen älteren und neuen Lektionen können die Stimmen unterschiedlich klingen. Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
 
 ## Großwörterbuch
 
@@ -74,3 +74,7 @@ Persönliche Lerndaten werden lokal gespeichert; keine Registrierung, Werbung od
 - `android/` + `.github/workflows/android-apk.yml`: Android-App und automatischer CI-Build
 
 Nicht offizielles Angebot Kasachstans.
+
+### Technischer Audio-Hinweis
+
+Der GitHub-Build lädt die vorhandenen Svetlana-Clips optional aus dem erfolgreichen Steppe-1.1-GitHub-Artefakt. Alle fehlenden Dateien werden lokal mit dem von [Piper Voices](https://huggingface.co/rhasspy/piper-voices/tree/main/ru/ru_RU/dmitri/medium) bereitgestellten russischen Dmitri-Modell erzeugt. Die vorhandenen 128 MP3s werden dadurch nicht unnötig neu synthetisiert. Bitte die Lizenz und das Modellblatt des Sprachmodells vor kommerzieller Weitergabe beachten.

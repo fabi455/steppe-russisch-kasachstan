@@ -361,7 +361,8 @@ public class MainActivity extends Activity {
             deleteTree(scratch);
             try {
                 extractVerified(zip,scratch,revision);
-                Set<String> oldIds=checkedIds(new JSONArray(bundledContent()));
+                String previous=installedLessons();
+                Set<String> oldIds=checkedIds(new JSONArray(previous.isEmpty()?bundledContent():previous));
                 Set<String> ids=checkedIds(new JSONArray(readUtf8(new File(scratch,"content.json"),MAX_JSON)));
                 if(!ids.containsAll(oldIds))throw new Exception("Update würde vorhandene Lernkarten entfernen");
                 File[] mp3s=new File(scratch,"audio").listFiles();

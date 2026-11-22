@@ -38,6 +38,8 @@
   }
 
   function page() {
+    // The portable offline HTML already embeds the full lexicon before this module.
+    if (!words && Array.isArray(window.STEPPE_LEXICON)) words = window.STEPPE_LEXICON;
     if (!words) {
       if (!loadError) requestData();
       return `<div class="page-intro"><div class="eyebrow">NEU · GROSSES WÖRTERBUCH</div><h1>Russisch von A bis Я.</h1>

@@ -11,9 +11,21 @@
   const state = () => window.STEPPE_LEXICON_STATE;
   const saved = () => new Set(state()?.favorites?.() || []);
   const count = () => words?.length || window.STEPPE_LEXICON_META?.count || 0;
+  // A course-authored expression, separate from the CC BY-SA OpenRussian source.
+  const courseWord = ['Понаехали!','понае́хали','Da sind aber viele Leute hergezogen! (umgangssprachlich, häufig abwertend gegenüber Zugezogenen)',3,'Панаехоли'];
+  const expand = base => {
+    const rows = base.slice();
+    const found = rows.findIndex(row => fold(row[0]).replace(/[!?]+$/g,'') === 'понаехали');
+    if (found >= 0) {
+      rows[found] = [...rows[found]];
+      rows[found][4] = 'Панаехоли';
+    } else rows.push(courseWord);
+    return rows;
+  };
+
 
   function requestData() {
-    if (Array.isArray(window.STEPPE_LEXICON)) { words = window.STEPPE_LEXICON; return; }
+    if (Array.isArray(window.STEPPE_LEXICON)) { words = expand(window.STEPPE_LEXICON); return; }
     if (loading) return;
     loading = true; loadError = '';
     const script = document.createElement('script');
@@ -22,7 +34,7 @@
     script.onload = () => {
       loading = false;
       if (Array.isArray(window.STEPPE_LEXICON) && window.STEPPE_LEXICON.length >= 50000) {
-        words = window.STEPPE_LEXICON;
+        words = expand(window.STEPPE_LEXICON);
         loadError = '';
       } else {
         loadError = 'Die Wörterbuchdatei ist unvollständig. Bitte die neueste App installieren.';
@@ -39,7 +51,7 @@
 
   function page() {
     // The portable offline HTML already embeds the full lexicon before this module.
-    if (!words && Array.isArray(window.STEPPE_LEXICON)) words = window.STEPPE_LEXICON;
+    if (!words && Array.isArray(window.STEPPE_LEXICON)) words = expand(window.STEPPE_LEXICON);
     if (!words) {
       if (!loadError) requestData();
       return `<div class="page-intro"><div class="eyebrow">NEU · GROSSES WÖRTERBUCH</div><h1>Russisch von A bis Я.</h1>
@@ -88,8 +100,8 @@
       if (part === 'saved') { if (!favorites.has(ru)) continue; }
       else if (part !== 'all' && Number(part) !== pos) continue;
       const r = fold(ru), d = fold(de);
-      if (q && !r.includes(q) && !d.includes(q)) continue;
-      const rank = !q ? 9 : r===q ? 0 : r.startsWith(q) ? 1 : d.startsWith(q) ? 2 : r.includes(q) ? 3 : 4;
+      if (q && !r.includes(q) && !d.includes(q) && !fold(row[4]||'').includes(q)) continue;
+      const rank = !q ? 9 : r===q || fold(row[4]||'')===q ? 0 : r.startsWith(q) ? 1 : d.startsWith(q) ? 2 : r.includes(q) ? 3 : 4;
       matched.push([row,rank]);
     }
     if (q) matched.sort((a,b)=>a[1]-b[1] || a[0][0].localeCompare(b[0][0],'ru'));

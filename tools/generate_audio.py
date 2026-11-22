@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate 321 offline Russian MP3 clips with neural TTS and a reliable fallback.
+"""Generate all offline Russian MP3 clips with neural TTS and a reliable fallback.
 
 Preferred existing audio: 128 Svetlana Neural samples from the previous verified APK.
 New clips: offline Piper ru_RU-dmitri-medium neural model, no network throttling.
@@ -25,9 +25,9 @@ PIPER_MODEL = ROOT / "voice" / "ru_RU-dmitri-medium.onnx"
 def items_to_speak():
     lessons = json.loads((ROOT / "content.json").read_text(encoding="utf-8"))
     result = [entry for lesson in lessons for entry in lesson["words"] + lesson["phrases"]]
-    if len(lessons) != 20 or len(result) != 321:
-        raise RuntimeError(f"Expected 20 lessons and 321 speech clips, found {len(lessons)} / {len(result)}")
-    if len({w["id"] for w in result}) != 321 or any(not w["term"].strip() for w in result):
+    if len(lessons) < 20 or len(result) < 321:
+        raise RuntimeError(f"Expected at least 20 lessons and 321 speech clips, found {len(lessons)} / {len(result)}")
+    if len({w["id"] for w in result}) != len(result) or any(not w["term"].strip() for w in result):
         raise RuntimeError("Invalid/duplicated text-to-speech entry")
     return result
 
@@ -96,7 +96,7 @@ async def main():
     sem = asyncio.Semaphore(1)
     results = await asyncio.gather(*(one(entry,sem) for entry in entries))
     clips = [AUDIO / (item["id"]+".mp3") for item in entries]
-    if len(clips) != 321 or not all(valid_mp3(file) for file in clips):
+    if len(clips) != len(entries) or not all(valid_mp3(file) for file in clips):
         raise RuntimeError("One or more MP3 assets failed verification")
     sources = dict(results)
     (AUDIO / "sources.json").write_text(

@@ -23,7 +23,7 @@ CONCURRENCY = 2
 def items_to_speak():
     lessons = json.loads(CONTENT.read_text(encoding='utf-8'))
     result = [item for lesson in lessons for item in lesson['words'] + lesson['phrases']]
-    assert len(result) == 128, f'Erwartet: 128 Einträge, gefunden: {len(result)}'
+    assert len(result) == 320, f'Erwartet: 320 Einträge, gefunden: {len(result)}'
     assert len({item['id'] for item in result}) == len(result), 'Doppelte Audio-IDs'
     for item in result:
         assert item['term'].strip(), item['id']

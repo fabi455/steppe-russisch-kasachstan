@@ -1,0 +1,67 @@
+name: Steppe Lerninhalte – ohne APK aktualisieren
+on:
+  push:
+    branches: [main]
+    paths:
+      - content.json
+      - content.js
+  workflow_dispatch:
+concurrency:
+  group: steppe-content-updates
+  cancel-in-progress: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prüfe dass JS und JSON dieselben Lektionen enthalten
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from pathlib import Path
+          source=Path('content.js').read_text('utf-8')
+          m=re.search(r'window\.STEPPE_CONTENT\s*=\s*(\[[\s\S]*\]);\s*$',source)
+          assert m, 'content.js ist nicht korrekt aufgebaut'
+          assert json.loads(m.group(1)) == json.loads(Path('content.json').read_text('utf-8'))
+          print('Kursdaten stimmen überein')
+          PY
+      - name: Vorhandene Hörproben aus dem letzten Lernpaket wiederverwenden
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p audio
+          mkdir -p .update-cache
+          if gh release download content-latest --repo "${GITHUB_REPOSITORY}" \
+              --pattern steppe-content.zip --dir .update-cache; then
+            unzip -o -q .update-cache/steppe-content.zip 'audio/*.mp3' -d .
+            echo "Hörproben aus bestehendem Lernpaket wiederhergestellt."
+          else
+            bash tools/restore_legacy_audio.sh
+          fi
+      - name: Für neue Wörter fehlende neuronale Hörproben erzeugen
+        run: |
+          python3 -m pip install 'edge-tts==7.3.1' 'piper-tts==1.8.0' 'mutagen>=1.47,<2'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+          mkdir -p voice
+          (cd voice && python3 -m piper.download_voices ru_RU-dmitri-medium)
+          STEPPE_AUDIO_MODE=local python3 tools/generate_audio.py
+      - name: Offline-Lernpaket mit Integritätsprüfung bauen
+        run: python3 tools/build_content_update.py
+      - name: Lernpaket nur nach erfolgreicher Prüfung veröffentlichen
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/publish_content_update.py
+      - name: Lernpaket zur manuellen Sicherung anbieten
+        uses: actions/upload-artifact@v4
+        with:
+          name: Steppe-Lerninhalte
+          path: dist/steppe-content.zip
+          retention-days: 30

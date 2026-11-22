@@ -10,3 +10,13 @@
 .alpha-letter{background:#eaf4f8;border:1px solid #d8eaf3;border-radius:10px;text-align:center;padding:13px 4px;font-weight:700;color:#205575;font-size:1.1rem}
 .term,.nor,.word,.phrase{overflow-wrap:anywhere}
 @media(max-width:760px){.learning-card .term{font-size:clamp(2rem,7vw,3rem)}.hero h1{font-size:clamp(2.05rem,8vw,2.7rem)}}
+
+/* Steppe 1.2: 56k-entry Russian–German dictionary */
+.lexicon-entry {align-items:start;gap:14px;min-width:0}
+.lexicon-entry .nor {font-size:1.22rem;line-height:1.35;overflow-wrap:anywhere}
+.lexicon-entry .de {margin:8px 0;line-height:1.5;overflow-wrap:anywhere}
+.lexicon-stress {font-size:.91rem;color:var(--muted);margin-top:3px}
+.lexicon-entry .btn-icon {flex:none;font-size:1.35rem}
+#lexicon-results {align-items:stretch}
+#lexicon-more[hidden] {display:none}
+@media (max-width:600px){.lexicon-entry .nor{font-size:1.15rem}}

@@ -1,4 +1,4 @@
-name: Steppe Russisch – Android APK (Neuralstimme)
+name: Steppe Russisch – Android APK mit 56k-Wörterbuch
 on:
   push:
     branches: [main]
@@ -7,8 +7,9 @@ permissions:
   contents: read
 jobs:
   build:
+    name: Android + vollständige Offline-Web-App
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,19 +32,35 @@ jobs:
           test -n "$SDK_MANAGER"
           yes | "$SDK_MANAGER" --licenses >/dev/null || true
           "$SDK_MANAGER" "platforms;android-35" "build-tools;35.0.0"
+      - name: Create verified offline Russian–German dictionary
+        run: |
+          python3 tools/build_dictionary.py
+          python3 -m py_compile tools/build_dictionary.py tools/build_standalone.py
+          node --check app.js
+          node --check dictionary/ui.js
+          node --check dictionary/ru-de.js
       - name: Install natural neural TTS engine
         run: python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1'
-      - name: Generate 128 natural Russian MP3 samples
+      - name: Generate original 128 Russian lesson MP3s
         run: |
           python3 tools/generate_audio.py
           test "$(find audio -name '*.mp3' | wc -l)" -eq 128
+      - name: Build full offline browser edition
+        run: python3 tools/build_standalone.py
       - name: Build installable Android APK
         working-directory: android
         run: gradle --no-daemon :app:assembleDebug
-      - name: Upload APK
+      - name: Upload installable Android APK
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Russisch-1.1-Neural-APK
+          name: Steppe-Russisch-1.2-Woerterbuch-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 90
+      - name: Upload portable offline HTML edition
+        uses: actions/upload-artifact@v4
+        with:
+          name: Steppe-Russisch-1.2-Offline-Web
+          path: dist/Steppe-Russisch-1.2-Offline.html
           if-no-files-found: error
           retention-days: 90

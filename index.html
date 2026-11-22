@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <meta name="theme-color" content="#152a29"/>
 <meta name="description" content="Russisch für Kasachstan lernen: 20 Lektionen, 321 russische Hörbeispiele, Quiz, Karteikarten, offline."/>
-<title>Steppe · Russisch für Kasachstan</title>
+<title>Steppe 1.4 · Russisch für Kasachstan</title>
 <link rel="manifest" href="manifest.webmanifest"/>
 <link rel="icon" type="image/png" href="icons/icon-192.png"/>
 <link rel="stylesheet" href="style.css"/>
@@ -26,6 +26,18 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <input class="file-input" type="file" accept="application/json,.json" id="import-file"/>
 <script src="content.js"></script>
+<script>
+  // Native-only content packs contain data and MP3s, never executable JavaScript.
+  try {
+    if (window.SteppeAndroid && SteppeAndroid.getUpdatedContent) {
+      const raw = SteppeAndroid.getUpdatedContent();
+      if (raw) {
+        const lessons = JSON.parse(raw);
+        if (Array.isArray(lessons) && lessons.length >= 20) window.STEPPE_CONTENT = lessons;
+      }
+    }
+  } catch (err) { /* Continue with bundled offline lessons if no update is installed. */ }
+</script>
 <script>/* EMBED_AUDIO */</script>
 <script src="dictionary/ui.js"></script>
 <script src="adaptive.js"></script>

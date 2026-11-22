@@ -36,7 +36,12 @@ async def one(item, folder):
     for attempt in range(7):
         try:
             partial.unlink(missing_ok=True)
-            talk=edge_tts.Communicate(item["term"],voice=VOICE,rate=RATE)
+            # The Microsoft endpoint intermittently refuses the unhyphenated
+            # colloquial word. This is a pronunciation-only hint; visible text,
+            # lesson data and word identity remain the canonical "Понаехали!".
+            speak_text = ("По-наехали!" if item["id"]=="w20_13_ponaekhali"
+                          and item["term"]=="Понаехали!" else item["term"])
+            talk=edge_tts.Communicate(speak_text,voice=VOICE,rate=RATE)
             await asyncio.wait_for(talk.save(str(partial)),timeout=55)
             if not valid_mp3(partial):
                 raise ValueError("Neural TTS returned invalid/empty audio")

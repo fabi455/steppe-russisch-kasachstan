@@ -163,6 +163,10 @@ public class MainActivity extends Activity {
         return file.isFile() ? file : null;
     }
 
+    private String getApplicationVersion() {
+        try { return getPackageManager().getPackageInfo(getPackageName(),0).versionName; }
+        catch(Exception ignored) { return "unbekannt"; }
+    }
     private final class LocalFiles {
         @JavascriptInterface public String getUpdatedContent() {
             return installedLessons();
@@ -193,7 +197,7 @@ public class MainActivity extends Activity {
             executor.execute(()->checkContent(true));
         }
         @JavascriptInterface public String getUpdateInfo() {
-            return "Inhalte: Revision "+installedRevision()+" · App: "+BuildConfig.VERSION_NAME;
+            return "Inhalte: Revision "+installedRevision()+" · App: "+getApplicationVersion();
         }
         @JavascriptInterface public void openAppUpdates() {
             runOnUiThread(()->{

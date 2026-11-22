@@ -148,17 +148,23 @@ public class MainActivity extends Activity {
     private long installedRevision() {
         File installed = new File(activeContent(),"update-revision.json");
         if(installed.isFile())try {
-            return new JSONObject(readUtf8(installed,2048)).optLong("revision",0);
+            return Math.max(bundledRevision(),new JSONObject(readUtf8(installed,2048)).optLong("revision",0));
         }catch(Exception ignored){}
         return bundledRevision();
     }
+    private boolean isActiveUpdateNewer() {
+        File f=new File(activeContent(),"update-revision.json");
+        if(!f.isFile())return false;
+        try{return new JSONObject(readUtf8(f,2048)).optLong("revision",0)>=bundledRevision();}
+        catch(Exception e){return false;}
+    }
     private String installedLessons() {
         File json = new File(activeContent(),"content.json");
-        if(!json.isFile())return "";
+        if(!json.isFile() || !isActiveUpdateNewer())return "";
         try { return readUtf8(json,MAX_JSON); } catch(Exception ignored){ return ""; }
     }
     private File downloadedAudio(String id) {
-        if(!isValidId(id))return null;
+        if(!isValidId(id) || !isActiveUpdateNewer())return null;
         File file=new File(activeContent(), "audio/"+id+".mp3");
         return file.isFile() ? file : null;
     }

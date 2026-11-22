@@ -1,67 +1,151 @@
-name: Steppe Lerninhalte – ohne APK aktualisieren
+name: Steppe Svetlana – alle russischen Hörproben
 on:
   push:
     branches: [main]
     paths:
       - content.json
       - content.js
+      - tools/generate_svetlana.py
+      - tools/restore_svetlana.py
+      - tools/build_content_update.py
+      - .github/workflows/content-updates.yml
   workflow_dispatch:
 concurrency:
-  group: steppe-content-updates
+  group: steppe-svetlana-content
   cancel-in-progress: true
 permissions:
   contents: write
   actions: read
 jobs:
-  content:
+  restore:
+    name: Originale Svetlana-Audios prüfen und wiederverwenden
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Prüfe dass JS und JSON dieselben Lektionen enthalten
+      - name: Verifiziere Kursinhalt und Version
         run: |
           python3 - <<'PY'
           import json,re
           from pathlib import Path
-          source=Path('content.js').read_text('utf-8')
-          m=re.search(r'window\.STEPPE_CONTENT\s*=\s*(\[[\s\S]*\]);\s*$',source)
-          assert m, 'content.js ist nicht korrekt aufgebaut'
-          assert json.loads(m.group(1)) == json.loads(Path('content.json').read_text('utf-8'))
-          print('Kursdaten stimmen überein')
+          raw=Path('content.js').read_text('utf8')
+          match=re.search(r'window\.STEPPE_CONTENT\s*=\s*(\[[\s\S]*\]);\s*$',raw)
+          assert match and json.loads(match.group(1))==json.loads(Path('content.json').read_text('utf8'))
+          print("Kursdaten bestätigt")
           PY
-      - name: Vorhandene Hörproben aus dem letzten Lernpaket wiederverwenden
+      - name: Nur alte Svetlana-Aufnahmen laden, keine Dmitri-Aufnahmen
         env:
           GH_TOKEN: ${{ github.token }}
+        run: python3 tools/restore_svetlana.py
+      - name: Svetlana-Bestand als Artefakt sichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: svetlana-verified-audio
+          path: audio/*.mp3
+          if-no-files-found: error
+          retention-days: 14
+
+  synthesize:
+    name: Svetlana-Audio-Gruppe ${{ matrix.part }}
+    needs: restore
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        part: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Wiederverwendbare, stimmreine Hörproben laden
+        uses: actions/download-artifact@v4
+        with:
+          name: svetlana-verified-audio
+          path: audio
+      - name: Neural-Sprecherin Svetlana bereitstellen
+        run: python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1'
+      - name: Nur fehlende Hörproben mit Svetlana aufnehmen
         run: |
-          mkdir -p audio
-          mkdir -p .update-cache
-          if gh release download content-latest --repo "${GITHUB_REPOSITORY}" \
-              --pattern steppe-content.zip --dir .update-cache; then
-            unzip -o -q .update-cache/steppe-content.zip 'audio/*.mp3' -d .
-            echo "Hörproben aus bestehendem Lernpaket wiederhergestellt."
-          else
-            bash tools/restore_legacy_audio.sh
-          fi
-      - name: Für neue Wörter fehlende neuronale Hörproben erzeugen
+          python3 tools/generate_svetlana.py --reused audio --output generated --part ${{ matrix.part }} --parts 16
+      - name: Nur verifizierte Svetlana-MP3s dieser Gruppe speichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: svetlana-part-${{ matrix.part }}
+          path: generated/
+          if-no-files-found: error
+          retention-days: 14
+
+  publish:
+    name: Einheitliches Svetlana-Lernpaket auf GitHub veröffentlichen
+    needs: [restore, synthesize]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Alte Svetlana-Aufnahmen wiederherstellen
+        uses: actions/download-artifact@v4
+        with:
+          name: svetlana-verified-audio
+          path: audio
+      - name: Alle 16 Svetlana-Gruppen zusammenführen
+        uses: actions/download-artifact@v4
+        with:
+          pattern: svetlana-part-*
+          merge-multiple: true
+          path: generated
+      - name: Stimmenreinheit und MP3-Dateien prüfen
         run: |
-          python3 -m pip install 'edge-tts==7.3.1' 'piper-tts==1.8.0' 'mutagen>=1.47,<2'
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
-          mkdir -p voice
-          (cd voice && python3 -m piper.download_voices ru_RU-dmitri-medium)
-          STEPPE_AUDIO_MODE=local python3 tools/generate_audio.py
-      - name: Offline-Lernpaket mit Integritätsprüfung bauen
+          python3 -m pip install --disable-pip-version-check 'mutagen>=1.47,<2'
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from mutagen.mp3 import MP3
+          root=Path('.')
+          entries=[w for lesson in json.loads(Path('content.json').read_text('utf8'))
+                   for w in lesson['words']+lesson['phrases']]
+          ids={w['id'] for w in entries}
+          audio=Path('audio');audio.mkdir(exist_ok=True)
+          generated=Path('generated')
+          receipts=list(generated.glob('voice-shard-*.json'))
+          assert len(receipts)==16, 'Nicht alle Gruppen sind vollständig'
+          reported=set()
+          for receipt in receipts:
+            r=json.loads(receipt.read_text('utf8'))
+            assert r['voice']=='ru-RU-SvetlanaNeural'
+            for id in r['items']:
+              assert id not in reported, f'Doppelte Aufnahme {id}'
+              reported.add(id)
+          for f in generated.glob('*.mp3'):
+            assert f.stem in reported, f'MP3 ohne belegte Svetlana-Aufnahme: {f}'
+            (audio/f.name).write_bytes(f.read_bytes())
+          assert len(reported)==len(list(generated.glob('*.mp3')))
+          present={f.stem for f in audio.glob('*.mp3')}
+          assert present==ids, f'Fehlende/unerwartete Clips: {ids-present}'
+          for f in audio.glob('*.mp3'):
+            assert MP3(str(f)).info.length>0.1, f'Fehlerhafte MP3 {f}'
+          print(f'Bestätigt: {len(ids)} echte Svetlana-Neural-MP3s, davon {len(reported)} neu erstellt')
+          PY
+      - name: Offline-Lernpaket mit neuer Revision und SHA-256 erzeugen
+        env:
+          STEPPE_AUDIO_VOICE: ru-RU-SvetlanaNeural
         run: python3 tools/build_content_update.py
-      - name: Lernpaket nur nach erfolgreicher Prüfung veröffentlichen
+      - name: Erst nach vollständiger Prüfung als In-App-Aktualisierung veröffentlichen
         env:
           GH_TOKEN: ${{ github.token }}
         run: python3 tools/publish_content_update.py
-      - name: Lernpaket zur manuellen Sicherung anbieten
+      - name: Verifiziertes Svetlana-Lernpaket zusätzlich als Download sichern
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-Lerninhalte
+          name: Steppe-Svetlana-Komplettpaket
           path: dist/steppe-content.zip
-          retention-days: 30
+          if-no-files-found: error
+          retention-days: 90

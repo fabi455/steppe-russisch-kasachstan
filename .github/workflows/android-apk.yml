@@ -8,11 +8,12 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: read
+  actions: read
 jobs:
   build:
     name: Android + vollständige Offline-Web-App
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 35
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,7 +46,7 @@ jobs:
           node --check dictionary/ru-de.js
       - name: Install neural speech engines and local fallback voice
         run: |
-          python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1' 'piper-tts==1.8.0'
+          python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1' 'piper-tts==1.8.0' 'mutagen>=1.47,<2'
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
           mkdir -p voice
@@ -53,10 +54,27 @@ jobs:
           python3 -m piper.download_voices ru_RU-dmitri-medium
           test -s ru_RU-dmitri-medium.onnx
           test -s ru_RU-dmitri-medium.onnx.json
-      - name: Generate all 320 Russian lesson MP3s
+      - name: Recover existing 128 high-quality Svetlana MP3s
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash tools/restore_legacy_audio.sh
+      - name: Generate missing lesson MP3s with local neural voice
+        env:
+          STEPPE_AUDIO_MODE: local
         run: |
           python3 tools/generate_audio.py
           test "$(find audio -name '*.mp3' | wc -l)" -eq 320
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          from mutagen.mp3 import MP3
+          files = list(Path('audio').glob('*.mp3'))
+          assert len(files) == 320, len(files)
+          for file in files:
+              track = MP3(str(file))
+              assert track.info.length > 0.1, file
+          print('Validierte 320 MP3-Hörproben', flush=True)
+          PY
       - name: Build full offline browser edition
         run: python3 tools/build_standalone.py
       - name: Build installable Android APK

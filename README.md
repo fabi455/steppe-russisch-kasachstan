@@ -1,6 +1,6 @@
-# Steppe Russisch 1.3 – Russisch für Kasachstan 🇰🇿
+# Steppe Russisch 1.3.1 – Russisch für Kasachstan 🇰🇿
 
-**20 Lektionen, 240 Lernvokabeln, 80 Beispielsätze, 320 natürliche russische Neural-Hörproben** und ein **offline verfügbares Russisch-Deutsch-Wörterbuch mit 56.514 Einträgen**.
+**20 Lektionen, 241 Lernvokabeln, 80 Beispielsätze, 321 natürliche russische Neural-Hörproben** und ein **offline verfügbares Russisch-Deutsch-Wörterbuch mit 56.514 OpenRussian-Einträgen plus einem redaktionellen Zusatzwort**.
 
 ## Neu: Dein persönlicher Lernpfad
 
@@ -29,21 +29,21 @@ Die ursprünglichen acht Lektionen bleiben bestehen. Zwölf zusätzliche Lektion
 11. Wohnung & Unterkunft
 12. Probleme & Notfälle
 
-Insgesamt 20 Lektionen mit 240 Lernvokabeln und 80 Beispielsätzen. Die App übernimmt möglichst die **128 ursprünglichen Svetlana-Neural-Hörproben** aus dem bewährten Build von Version 1.1. Die **192 neuen Hörproben** entstehen zuverlässig offline durch das neuronale russische Piper-Modell **Dmitri** (Modelldokumentation siehe unten). Sollte das frühere Build-Artefakt nicht mehr verfügbar sein, erzeugt Piper auch die bisherigen 128 Clips neu. Alle Hörproben sind synthetisch, keine Aufnahmen echter Muttersprachler; zwischen älteren und neuen Lektionen können die Stimmen unterschiedlich klingen. Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
+Insgesamt 20 Lektionen mit 241 Lernvokabeln und 80 Beispielsätzen. Die App übernimmt möglichst die **128 ursprünglichen Svetlana-Neural-Hörproben** aus dem bewährten Build von Version 1.1. Die **192 neuen Hörproben** entstehen zuverlässig offline durch das neuronale russische Piper-Modell **Dmitri** (Modelldokumentation siehe unten). Sollte das frühere Build-Artefakt nicht mehr verfügbar sein, erzeugt Piper auch die bisherigen 128 Clips neu. Alle Hörproben sind synthetisch, keine Aufnahmen echter Muttersprachler; zwischen älteren und neuen Lektionen können die Stimmen unterschiedlich klingen. Im Android-Build sind alle Hörproben offline verfügbar. Sprache ist **Russisch** mit Alltagsschwerpunkt Kasachstan, **kein Kasachischkurs**.
 
 ## Großwörterbuch
 
-Über **Wörterbuch → Großwörterbuch** findest du **56.514 unterschiedliche russische Stichwörter** mit deutschen Bedeutungen, außerdem Wortartenfilter, Suche in beide Richtungen und eine Merkliste. Diese Daten sind **offline eingebunden**. Anders als die 320 Kursaufnahmen haben die 56.514 Wörterbucheinträge **keine eigenen MP3-Dateien**. Ein Wörterbuch mit buchstäblich allen jemals verwendeten russischen Wörtern ist nicht möglich; Beugungsformen, Spezialvokabular und regionale Varianten sind teilweise unvollständig.
+Über **Wörterbuch → Großwörterbuch** findest du **56.514 Stichwörter aus OpenRussian und einen weiteren redaktionellen Kurseintrag** mit deutschen Bedeutungen, außerdem Wortartenfilter, Suche in beide Richtungen und eine Merkliste. Diese Daten sind **offline eingebunden**. Anders als die 321 Kursaufnahmen haben die 56.514 Wörterbucheinträge **keine eigenen MP3-Dateien**. Ein Wörterbuch mit buchstäblich allen jemals verwendeten russischen Wörtern ist nicht möglich; Beugungsformen, Spezialvokabular und regionale Varianten sind teilweise unvollständig.
 
 **Datenquelle und Lizenz:** <https://openrussian.org/>; Originaldaten: <https://github.com/Badestrand/russian-dictionary>, Commit `50e210c4803237779cb562bc1abcea529066031c`, unter **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**, <https://creativecommons.org/licenses/by-sa/4.0/>. Bearbeitung: Zusammenführung gleicher Grundformen, Entfernung von Einträgen ohne deutsche Übersetzung, verkürzte Anzeigeform und kompaktes JSON. Der abgeleitete Wörterbuchdatensatz `dictionary/ru-de.js` steht ebenfalls unter **CC BY-SA 4.0**. Bitte diese Herkunfts- und Lizenzinformation bei jeder Weitergabe erhalten.
 
 ## Android-APK herunterladen
 
-[GitHub Actions](https://github.com/fabi455/steppe-russisch-kasachstan/actions/workflows/android-apk.yml) öffnen, den **erfolgreichen Build** wählen, unter **Artifacts** `Steppe-Russisch-1.3-Adaptiv-APK` herunterladen, ZIP entpacken und `app-debug.apk` auf dem Android-Handy öffnen. Diese APK ist eine Debug-Version zur persönlichen Installation, kein Play-Store-Release.
+[GitHub Actions](https://github.com/fabi455/steppe-russisch-kasachstan/actions/workflows/android-apk.yml) öffnen, den **erfolgreichen Build** wählen, unter **Artifacts** `Steppe-Russisch-1.3.1-Wort-APK` herunterladen, ZIP entpacken und `app-debug.apk` auf dem Android-Handy öffnen. Diese APK ist eine Debug-Version zur persönlichen Installation, kein Play-Store-Release.
 
 **Vor einem möglicherweise nötigen Deinstallieren der alten App:** Unter Einstellungen **Lernstand exportieren** und die JSON-Sicherung nach Installation von Steppe 1.3 importieren. Android-Debug-APK-Signaturen können sich zwischen Builds unterscheiden.
 
-Die Offline-Web-Version liegt ebenfalls als GitHub-Actions-Artefakt `Steppe-Russisch-1.3-Offline-Web` vor, wenn der Build erfolgreich ist.
+Die Offline-Web-Version liegt ebenfalls als GitHub-Actions-Artefakt `Steppe-Russisch-1.3.1-Offline-Web` vor, wenn der Build erfolgreich ist.
 
 ## Selbst entwickeln / bauen
 
@@ -64,12 +64,12 @@ Persönliche Lerndaten werden lokal gespeichert; keine Registrierung, Werbung od
 
 ## Technischer Aufbau
 
-- `content.js` und `content.json`: 20 Lektionen und 320 eindeutige Audio-IDs
+- `content.js` und `content.json`: 20 Lektionen und 321 eindeutige Audio-IDs
 - `adaptive.js`: lokaler Algorithmus für Wiederholungsabstände und individuelle Übungsauswahl
 - `app.js`: Lernoberfläche, Quiz, Lernfortschritt, Karteikarten
 - `dictionary/ui.js`: offline Wörterbuchsuche und Merkliste
 - `tools/build_dictionary.py`: Download mit Prüfhash der Wörterbuchquelle, Aufbereitung in `dictionary/ru-de.js`
-- `tools/generate_audio.py`: erzeugt 320 russische Neural-MP3s im `audio/`-Verzeichnis
+- `tools/generate_audio.py`: erzeugt 321 russische Neural-MP3s im `audio/`-Verzeichnis
 - `tools/build_standalone.py`: portable Offline-Browser-Version mit Wörterbuch und Audio
 - `android/` + `.github/workflows/android-apk.yml`: Android-App und automatischer CI-Build
 
@@ -78,3 +78,7 @@ Nicht offizielles Angebot Kasachstans.
 ### Technischer Audio-Hinweis
 
 Der GitHub-Build lädt die vorhandenen Svetlana-Clips optional aus dem erfolgreichen Steppe-1.1-GitHub-Artefakt. Alle fehlenden Dateien werden lokal mit dem von [Piper Voices](https://huggingface.co/rhasspy/piper-voices/tree/main/ru/ru_RU/dmitri/medium) bereitgestellten russischen Dmitri-Modell erzeugt. Die vorhandenen 128 MP3s werden dadurch nicht unnötig neu synthetisiert. Bitte die Lizenz und das Modellblatt des Sprachmodells vor kommerzieller Weitergabe beachten.
+
+## Neu in Version 1.3.1: Понаехали!
+
+Zur Lektion 20 wurde die Wendung **Понаехали!** (gesprochen etwa *ponajéchali*) hinzugefügt. Deutsche Bedeutung: **„Da sind aber viele Leute hergezogen!“**. Die Wendung ist umgangssprachlich und **oft abwertend gegenüber zugezogenen Menschen**; sie sollte eher verstanden als unbedacht selbst verwendet werden. Der Suchbegriff **Панаехоли** wird als vom Nutzer genannte, nicht standardmäßige Schreibweise erkannt. Die richtige Schreibweise ist **Понаехали!**. Für das Wort gibt es eine zusätzliche neuronale Offline-Hörprobe. Dadurch hat der Kurs **241 Vokabeln, 80 Beispielsätze und 321 Audioaufnahmen**.

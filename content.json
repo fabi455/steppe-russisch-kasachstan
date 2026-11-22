@@ -1791,7 +1791,7 @@
     "symbol": "!",
     "minutes": 12,
     "tag": "Wichtig",
-    "intro": "Bei Verlust, Problemen oder dringenden Situationen um Hilfe bitten.",
+    "intro": "Bei Verlust, Problemen oder dringenden Situationen um Hilfe bitten. Zusätzlich erkennst du eine umgangssprachliche, häufig abwertende Wendung über Zugezogene.",
     "tip": "Где находится …? bedeutet Wo befindet sich …? In echten Notfällen wende dich an lokale Rettungsdienste.",
     "words": [
       {
@@ -1853,6 +1853,14 @@
         "id": "w20_12",
         "term": "объяснить",
         "meaning": "erklären"
+      },
+      {
+        "id": "w20_13_ponaekhali",
+        "term": "Понаехали!",
+        "meaning": "Da sind aber viele Leute hergezogen! (umgangssprachlich, oft abwertend gegenüber Zugezogenen)",
+        "aliases": [
+          "Панаехоли"
+        ]
       }
     ],
     "phrases": [

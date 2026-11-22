@@ -1,3 +1,42 @@
+# Steppe Russisch 1.4 – Russisch für Kasachstan 🇰🇿
+
+## NEU: Aktualisierungen ohne Deinstallation
+
+Die Android-App 1.4 kann künftig neue **Wörter, Lektionen und russische Hörproben** als geprüftes Lernpaket von deinem GitHub abrufen. Neue Kursdaten erscheinen nach dem Neustart der Lernansicht – **ohne erneute APK-Installation**. Der Lernfortschritt und alle persönlichen Bewertungen bleiben unter dem bisherigen Schlüssel `steppe-russisch-kz-v1` auf dem Gerät.
+
+- **Automatisch:** Steppe prüft neue Lernpakete ungefähr einmal pro Tag, sofern eine Internetverbindung besteht. Ohne Internet funktionieren die mitgelieferten Lektionen und Audiodateien wie bisher offline.
+- **Manuell:** Unter **Einstellungen → Aktualisierungen → Lerninhalte aktualisieren**.
+- **Sicherheit:** Der Download erfolgt ausschließlich per HTTPS von deinem GitHub. Das ZIP muss zu einer veröffentlichten SHA-256-Prüfsumme passen, alle Einträge dürfen nur Lerndaten und MP3s enthalten und bereits vorhandene Wort-IDs dürfen nicht verschwinden. Schlägt eine Prüfung fehl, bleibt der bisherige Lernstoff erhalten.
+- **Veröffentlichung:** `.github/workflows/content-updates.yml` reagiert auf Änderungen an `content.json` / `content.js`, generiert fehlende MP3s mit einer neuronalen russischen Stimme und veröffentlicht das vollständige Offline-Lernpaket unter dem GitHub-Release-Tag `content-latest`. Die App erhält nur Daten, **keinen heruntergeladenen ausführbaren Code**.
+- **Voraussetzung:** Neue Inhalte können erst nach der ersten erfolgreichen Veröffentlichung von `updates/latest.json` und `content-latest` abgerufen werden.
+
+## App-Programmaktualisierungen – einmalig Signierung einrichten
+
+Neue **Android-Funktionen** benötigen weiterhin eine neue APK. Damit Android diese wirklich **als Aktualisierung der vorhandenen App** akzeptiert und deinen Lernfortschritt erhält, müssen **Anwendungs-ID `com.steppe.russisch` und der private Signaturschlüssel über alle Updates gleich bleiben**. Android fordert bei einer APK-Aktualisierung möglicherweise weiterhin eine kurze Installationsbestätigung an. Vollautomatische Programmupdates sind normalerweise über den Play Store möglich.
+
+Die vorherigen Test-APKs aus GitHub Actions wurden mit **wechselnden Debug-Schlüsseln** gebaut. **Darum kann der Wechsel zur ersten dauerhaft signierten Version leider einmalig die Sicherung des Lernstands, Deinstallation der alten App, Neuinstallation und den Import erfordern.** Danach ist bei folgenden App-Updates mit demselben Release-Schlüssel keine Deinstallation nötig.
+
+Der CI-Build unterstützt eine dauerhaft stabile **Release-Signatur**, sobald in den GitHub-Repository-Secrets folgende vier Werte gesetzt wurden:
+
+1. `STEPPE_KEYSTORE_B64`: Base64-kodierter Inhalt einer privaten Android-JKS-Datei
+2. `STEPPE_STORE_PASSWORD`: Passwort der JKS-Datei
+3. `STEPPE_KEY_ALIAS`: Alias des Schlüssels (z. B. `steppe`)
+4. `STEPPE_KEY_PASSWORD`: Passwort des App-Schlüssels
+
+Ein neues Schlüsselpaar kann auf einem vertrauenswürdigen Computer so erstellt werden:
+
+```bash
+keytool -genkeypair -v -keystore steppe-release.jks -storetype JKS \
+  -alias steppe -keyalg RSA -keysize 3072 -validity 10000
+base64 < steppe-release.jks | tr -d '\n' > steppe-keystore-base64.txt
+```
+
+**Wichtig:** Den privaten Schlüssel niemals in den öffentlichen GitHub-Code committen und nicht verlieren. Bewahre eine zweite, sichere Kopie auf. Die Base64-Datei dient nur zum einmaligen Eintragen des Secrets und sollte danach sicher gelöscht werden. GitHub-Secrets: `https://github.com/fabi455/steppe-russisch-kasachstan/settings/secrets/actions`.
+
+Wenn der Schlüssel konfiguriert ist, veröffentlicht `.github/workflows/android-apk.yml` künftig bei neuen Programmversionen eine **signierte Release-APK** unter GitHub **Releases**. Unter **Einstellungen → App-Versionen ansehen** gelangst du dorthin. Ohne die vier Secrets gibt es weiterhin nur eine **Debug-Test-APK**, die noch keine verlässlichen In-Place-Programmupdates bietet.
+
+---
+
 # Steppe Russisch 1.3.1 – Russisch für Kasachstan 🇰🇿
 
 **20 Lektionen, 241 Lernvokabeln, 80 Beispielsätze, 321 natürliche russische Neural-Hörproben** und ein **offline verfügbares Russisch-Deutsch-Wörterbuch mit 56.514 OpenRussian-Einträgen plus einem redaktionellen Zusatzwort**.

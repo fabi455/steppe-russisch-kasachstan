@@ -42,7 +42,7 @@ html = html.replace("<script>/* EMBED_AUDIO */</script>",
                     "<script>window.STEPPE_EMBED_AUDIO=" +
                     json.dumps(clips, ensure_ascii=False, separators=(",", ":")) + ";</script>")
 html = html.replace("</head>", '<meta name="offline-version" content="Steppe 1.2: full dictionary + audio"/>\n</head>')
-out = root / "dist" / "Steppe-Russisch-1.2-Offline.html"
+out = root / "dist" / "Steppe-Russisch-1.3-Offline.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(html, encoding="utf-8")
 print(f"Offline-App: {out.stat().st_size:,} Bytes, {len(clips)} Audios und Wörterbuch eingebettet")

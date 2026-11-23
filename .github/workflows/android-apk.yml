@@ -1,4 +1,4 @@
-name: Steppe Android + In-App-Aktualisierungen
+name: Steppe Android 1.4.1 – Mobile Einstellungen + Svetlana
 on:
   push:
     branches: [main]
@@ -23,7 +23,7 @@ permissions:
   actions: read
 jobs:
   build:
-    name: Android 1.4 + geprüftes Offline-Lernpaket
+    name: Android 1.4.1 + Svetlana-Sprachpaket
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
@@ -56,33 +56,24 @@ jobs:
           node --check adaptive.js
           node --check dictionary/ui.js
           node --check dictionary/ru-de.js
-      - name: Install neural speech engines and local fallback voice
-        run: |
-          python3 -m pip install --disable-pip-version-check 'edge-tts==7.3.1' 'piper-tts==1.8.0' 'mutagen>=1.47,<2'
-          sudo apt-get update -qq
-          sudo apt-get install -y -qq ffmpeg
-          mkdir -p voice
-          (cd voice && python3 -m piper.download_voices ru_RU-dmitri-medium)
-      - name: Restore existing verified neural MP3s
+          python3 -m py_compile tools/restore_published_svetlana.py
+      - name: Restore the verified all-Svetlana audio update
         env:
           GH_TOKEN: ${{ github.token }}
-        run: bash tools/restore_legacy_audio.sh
-      - name: Generate missing neural MP3s
-        env:
-          STEPPE_AUDIO_MODE: local
         run: |
-          python3 tools/generate_audio.py
+          python3 -m pip install --disable-pip-version-check 'mutagen>=1.47,<2'
+          python3 tools/restore_published_svetlana.py
           python3 - <<'PY'
           import json
           from pathlib import Path
           from mutagen.mp3 import MP3
-          lessons=json.loads(Path('content.json').read_text(encoding='utf-8'))
+          lessons=json.loads(Path('content.json').read_text('utf-8'))
           ids=[w['id'] for l in lessons for w in l['words']+l['phrases']]
           assert len(ids)>=321 and len(set(ids))==len(ids)
           for id in ids:
               f=Path('audio')/(id+'.mp3')
               assert f.is_file() and MP3(str(f)).info.length>0.1,f
-          print('Validierte',len(ids),'natürlichere MP3-Hörproben')
+          print('Validierte',len(ids),'Svetlana-Neural-Hörproben')
           PY
       - name: Build signed content-only package and native revision metadata
         run: python3 tools/build_content_update.py
@@ -95,7 +86,7 @@ jobs:
       - name: Upload Android test APK
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-1.4-Update-System-Test-APK
+          name: Steppe-1.4.1-Einstellungen-Svetlana-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 90
@@ -135,14 +126,14 @@ jobs:
       - name: Upload complete offline HTML app
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-1.4-Offline-Web
+          name: Steppe-1.4.1-Offline-Web
           path: dist/Steppe-Russisch-1.4-Offline.html
           if-no-files-found: error
           retention-days: 90
       - name: Upload content-only ZIP for inspection
         uses: actions/upload-artifact@v4
         with:
-          name: Steppe-1.4-Lernpaket
+          name: Steppe-1.4.1-Lernpaket
           path: dist/steppe-content.zip
           if-no-files-found: error
           retention-days: 90

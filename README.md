@@ -1,5 +1,11 @@
 # Steppe Russisch 1.4 – Russisch für Kasachstan 🇰🇿
 
+## Android 1.4.1 – Einstellungen auch auf kleinen Smartphones sichtbar
+
+Auf schmalen Android-Bildschirmen zeigte die ursprüngliche untere Leiste nur die ersten fünf Navigationspunkte. Dadurch war **Einstellungen → Aktualisierungen** nicht erreichbar. Diese Version ergänzt den Menüpunkt **Mehr** in der unteren Leiste. Über **Mehr → Einstellungen → Lerninhalte aktualisieren** lassen sich die neuen Svetlana-Hörproben direkt aus dem offiziellen Update-Lernpaket laden. Unter **Mehr** sind außerdem Wörterbuch, Aussprache und Fortschritt verfügbar.
+
+**Wichtig beim Wechsel von einer alten Debug-APK:** Android benötigt für eine Installation über die bestehende App dasselbe Signaturzertifikat. GitHub Actions erzeugt möglicherweise einen anderen Debug-Schlüssel; sichere deshalb nach Möglichkeit den Lernstand, bevor du eine ältere Installation ersetzen musst. Ist der Menüpunkt „Einstellungen“ in der alten mobilen App nicht erreichbar, **nicht vorschnell deinstallieren**, denn dabei können ungesicherte Lerndaten verloren gehen.
+
 ## Einheitliche russische Stimme: Svetlana
 
 Auf Wunsch wird das **Audio-Lernpaket** wieder vollständig auf `ru-RU-SvetlanaNeural` umgestellt (leichter Lernmodus: −7 % Sprechtempo). Die **128 ursprünglichen Aufnahmen** aus Steppe 1.1 werden übernommen, sofern ihre russischen Texte unverändert sind. Alle weiteren Wörter und Sätze werden mit **derselben Stimme** neu gesprochen.

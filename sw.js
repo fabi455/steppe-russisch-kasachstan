@@ -1,4 +1,4 @@
-const CACHE = 'steppe-russisch-offline-v5-content-updates';
+const CACHE = 'steppe-russisch-offline-v6-mobile-settings';
 const CORE = ['./','./index.html','./app.js','./style.css','./content.js','./dictionary/ui.js','./dictionary/ru-de.js','./adaptive.js','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',event=>{
   event.waitUntil((async()=>{
